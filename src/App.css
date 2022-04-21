@@ -1,38 +1,75 @@
+* {
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+div {
+    display: block;
+}
+
 .App {
-  text-align: center;
+    margin: 0 auto;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    position: relative;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.BillBoard {
+    height: 10vh;
+    width: 100%;
+    background-color: aliceblue;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.Panel_open:hover .service-trade-panel {
+    width: 20%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+body {
+    /* Hide scrollbars */
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 100;
 }
 
-.App-link {
-  color: #61dafb;
+::-webkit-scrollbar {
+    position: absolute;
+    width: 0.9em;
+    height: 0.2em;
+    border-radius: 10px;
+    border-left: 1px solid black;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+::-webkit-scrollbar-thumb {
+    background: rgba(155, 182, 209, 0.959);
+    border-left: 1px solid black;
 }
+
+::-webkit-scrollbar-track {
+    border-left: 1px solid black;
+    background-color: rgba(255, 221, 189, 0.795);
+}
+
+::-webkit-scrollbar-corner {
+    background-color: #000000;
+}
+
+body {
+    scrollbar-face-color: rgba(102, 121, 141, 0.959);
+    scrollbar-face-color: rgba(102, 121, 141, 0.959);
+}
+
+
+/*# sourceMappingURL=scroll_customizing.css.map */
+
+.Footer {
+    height: 5rem;
+    width: 100%;
+    background-color: rgb(245, 245, 245);
+    bottom: 0;
+    position: relative;
+}
+
+@media only screen and (width:1000px) {}

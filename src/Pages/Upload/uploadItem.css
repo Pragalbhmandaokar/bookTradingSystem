@@ -1,0 +1,94 @@
+.Item-upload-body {
+    display: flex;
+    position: fixed;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    top: 9%;
+    height: 100%;
+    z-index: 10;
+}
+
+.Item-upload-Background {
+    /* Add the blur effect */
+    filter: blur(8px);
+    background-color: rgba(0, 0, 0, 0.192);
+    -webkit-filter: blur(8px);
+    /* Full height */
+    height: 100%;
+    width: 100%;
+    top: -9%;
+    z-index: 6;
+    position: absolute;
+}
+
+.Item-upload-container {
+    z-index: 10;
+    display: flex;
+    box-shadow: 0 0 10px grey;
+    width: 40%;
+    border-radius: 2px;
+    justify-content: center;
+    align-content: center;
+    height: 60%;
+    background-color: rgb(255, 255, 255);
+}
+
+.Item-upload-Picture {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(238, 238, 238);
+    width: 30%;
+    margin: 1%;
+    height: 35%;
+    border-radius: 5px;
+}
+
+.Item-upload-form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    border-radius: 2px;
+}
+
+.Item-upload-progress {
+    height: 90%;
+    width: 100%;
+    display: flex;
+    margin-top: 1%;
+    justify-content: center;
+    align-content: center;
+    background-color: rgb(160, 105, 33);
+}
+
+.upload-form {
+    height: 95%;
+    border-radius: 2px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 1%;
+}
+
+.formBody {
+    background-color: white;
+    border-radius: 2px;
+    box-shadow: 0 0 10px grey;
+}
+
+.formBody input {
+    display: all;
+    position: relative;
+    margin-left: 10%;
+    margin-top: 5%;
+    padding: 10px 12px;
+    width: 40%;
+    height: 20px;
+    font-size: 20px;
+    margin-bottom: 2%;
+    border: 1.5px solid #ccc;
+    border-radius: 2px;
+    background-color: #eee;
+}

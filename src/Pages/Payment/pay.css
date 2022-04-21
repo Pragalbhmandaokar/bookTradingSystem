@@ -1,0 +1,37 @@
+body {
+    background-color: rgb(10, 10, 10);
+    background-image: url("bool.jpg");
+    background-size: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1 {
+    color: rgb(241, 236, 236);
+    text-align: center;
+}
+
+.img1 {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+
+/* mouse over link */
+
+a {
+    color: rgba(0, 0, 0, 0);
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+p {
+    color: white;
+    font-family: verdana;
+    font-size: 20px;
+}

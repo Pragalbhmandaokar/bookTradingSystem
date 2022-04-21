@@ -1,0 +1,25 @@
+::-webkit-scrollbar {
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(112, 128, 144, 0.959);
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-corner {
+    background-color: #000000;
+}
+
+body {
+    scrollbar-track-color: rgba(54, 61, 69, 0.9795);
+    scrollbar-track-color: rgba(54, 61, 69, 0.9795);
+}
+
+
+/*# sourceMappingURL=scroll_customizing.css.map */

@@ -1,0 +1,131 @@
+.containerHeader {
+    width: 100%;
+    background-color: #131921;
+    color: #131921;
+    height: 6vh;
+    border-color: black;
+    border-bottom: 1px solid rgb(3, 3, 3);
+    display: flex;
+    justify-content: space-between;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    font-family: "Merriweather", "Georgia", serif;
+    font-weight: bold;
+}
+
+.body {
+    margin: none;
+}
+
+ul {
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+    list-style: none;
+}
+
+.link {
+    text-decoration: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.Header {
+    margin-left: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: -0.1px;
+    font-weight: 10rem;
+}
+
+.logo {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-style: normal;
+}
+
+.website-name {
+    font-family: "Merriweather", "Georgia", serif;
+    color: #e9e9ea;
+    background-size: cover;
+    text-transform: uppercase;
+    font-size: 40px;
+    line-height: .85;
+}
+
+.website-name {}
+
+.website-name span {
+    font-family: "Montserrat";
+    background-image: url(https://media.giphy.com/media/26BROrSHlmyzzHf3i/giphy.gif);
+    background-size: cover;
+    color: transparent;
+    -moz-background-clip: text;
+    letter-spacing: -3px;
+    -webkit-background-clip: text;
+    text-transform: uppercase;
+    font-size: 40px;
+    line-height: .75;
+    margin: 0
+}
+
+.nav {
+    display: flex;
+    margin-right: 10%;
+    justify-content: flex-end;
+    list-style: none;
+    align-items: center;
+}
+
+.nav li {
+    margin-right: 30px;
+    display: flex;
+    color: whitesmoke;
+}
+
+.SearchBar_container {
+    width: 60%;
+    height: 50%;
+    display: flex;
+}
+
+.SearchBar_container li {
+    display: flex;
+    align-items: center;
+}
+
+.SearchBar_container input {
+    border: 1px solid rgb(173, 173, 173);
+    border-radius: 5px 0 0 5px;
+}
+
+.SearchBar_container button {
+    background-color: tomato;
+    height: 100%;
+    width: 10%;
+    border-radius: 0 5px 5px 0;
+    border: 1px solid rgb(134, 134, 134);
+}
+
+.SearchBar {
+    left: 10px;
+    justify-content: center;
+    display: flex;
+    font-size: 20px;
+    padding-left: 10px;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+    height: 100%;
+}

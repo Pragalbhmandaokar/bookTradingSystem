@@ -1,0 +1,298 @@
+.service-trade-panel {
+    width: 0%;
+    border-radius: 5px;
+    position: fixed;
+    z-index: 1;
+    height: 100%;
+    left: 100%;
+    top: 0;
+    transform: translateX(-100%);
+    background-color: rgb(219, 219, 219);
+    overflow: hidden;
+    transition: 0.2s;
+}
+
+.service-trade-panel.openPanel {
+    width: 50%;
+    top: 0;
+    transition: 250ms;
+}
+
+.service-trade-panel-Header {
+    text-align: center;
+    font-weight: 10rem;
+    align-items: center;
+    align-content: center;
+    display: flex;
+    width: 100%;
+    height: 10%;
+    background-color: whitesmoke;
+    color: rgb(0, 0, 0);
+}
+
+.service-trade-panel-Header .logo {
+    width: 10%;
+    height: 100%;
+    border-right: 1px solid black;
+    text-align: center;
+    font-weight: 10rem;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    background-color: azure;
+    display: flex;
+    position: relative;
+}
+
+.service-trade-panel-Header ul {
+    display: flex;
+    height: 99%;
+    width: 90%;
+    padding-inline-start: 0px;
+    list-style: none;
+}
+
+.service-trade-panel-Header li {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    height: 100%;
+}
+
+.service-trade-panel-Header li button {
+    height: 100%;
+    width: 100%;
+}
+
+.service-trade-panel__container {
+    margin-left: 1%;
+    width: 100%;
+    overflow-x: scroll;
+    height: 90%;
+    background-color: #e0e0e0;
+}
+
+.Container-space {
+    position: relative;
+    padding: 10px;
+    width: 100%;
+    display: table-cell;
+    vertical-align: middle;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-around;
+    border-radius: 5px;
+}
+
+@media only screen and (max-width: 1000px) {
+    .service-trade-panel.active {
+        width: 90%;
+        transition: 250ms;
+    }
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500;700;900&display=swap");
+:root {
+    --pale-blue: hsl(225, 100%, 94%);
+    --bright-blue: hsl(245, 75%, 52%);
+    --very-pale-blue: hsl(225, 100%, 98%);
+    --desaturated-blue: hsl(224, 23%, 55%);
+    --dark-blue: hsl(223, 47%, 23%);
+}
+
+body {
+    font-family: "Red Hat Display", sans-serif;
+    font-size: 16px;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    padding: 0px;
+    margin: 0px;
+    background: var(--pale-blue);
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: url(https://rvs-order-summary-component.netlify.app/images/pattern-background-desktop.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: top;
+    z-index: -1;
+}
+
+main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    width: 320px;
+    min-height: 400px;
+    margin: 60px auto;
+    border-radius: 10px;
+    background: white;
+}
+
+.card .card-header {
+    width: 100%;
+    height: 156px;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.card .card-header img {
+    width: 100%;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.card .card-body {
+    width: 100%;
+    height: auto;
+    padding: 25px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card .card-body .card-title {
+    width: 100%;
+    font-weight: 900;
+    color: var(--dark-blue);
+    text-align: center;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.card .card-body .card-text {
+    width: 100%;
+    color: var(--desaturated-blue);
+    text-align: center;
+    line-height: 25px;
+    padding: 15px 0px;
+    box-sizing: border-box;
+}
+
+.card .card-body .card-plan {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 15px;
+    background: var(--very-pale-blue);
+    border-radius: 10px;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.card .card-body .card-plan .card-plan-img {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.card .card-body .card-plan .card-plan-text {
+    flex-grow: 6;
+    display: flex;
+    flex-direction: column;
+    row-gap: 4px;
+}
+
+.card .card-body .card-plan .card-plan-text .card-plan-title {
+    color: var(--dark-blue);
+    font-weight: 900;
+    font-size: 14px;
+}
+
+.card .card-body .card-plan .card-plan-text .card-plan-price {
+    color: var(--desaturated-blue);
+    font-size: 14px;
+}
+
+.card .card-body .card-plan .card-plan-link {
+    flex-grow: 1;
+}
+
+.card .card-body .card-plan .card-plan-link a {
+    color: var(--bright-blue);
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.card .card-body .card-plan .card-plan-link a:hover {
+    color: #766cf1;
+    text-decoration: none;
+}
+
+.card .card-body .card-payment-button {
+    padding: 25px 0px 15px;
+    box-sizing: border-box;
+}
+
+.card .card-body .card-payment-button button {
+    width: 100%;
+    height: 50px;
+    border: 0;
+    background: var(--bright-blue);
+    color: white;
+    font-weight: 700;
+    border-radius: 10px;
+    box-shadow: 0px 10px 20px 0px hsl(245deg 75% 52% / 44%);
+    cursor: pointer;
+}
+
+.card .card-body .card-payment-button button:hover {
+    background: #766cf1;
+}
+
+.card .card-body .card-cancel-button {
+    padding: 15px 0px;
+    box-sizing: border-box;
+}
+
+.card .card-body .card-cancel-button button {
+    width: 100%;
+    border: 0;
+    background: none;
+    color: var(--desaturated-blue);
+    font-weight: 900;
+    text-align: center;
+    cursor: pointer;
+}
+
+.card .card-body .card-cancel-button button:hover {
+    color: var(--dark-blue);
+}
+
+@media (max-width: 375px) {
+    body {
+        height: auto;
+    }
+    body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background: url(https://rvs-order-summary-component.netlify.app/images/pattern-background-mobile.svg);
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: top;
+        z-index: -1;
+    }
+}

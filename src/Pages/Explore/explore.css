@@ -1,0 +1,227 @@
+.headerComponents {
+    position: sticky;
+    width: 100%;
+    z-index: 1;
+    margin: 0;
+    top: 0;
+    height: 15vh;
+}
+
+.container {
+    max-width: 100%;
+    position: relative;
+    display: grid;
+    grid-template-areas: 'header header header newsSection ' 'main main main  newsSection';
+    grid-template-columns: 2fr 2fr 2fr 1.5fr;
+    grid-gap: 10px;
+    overflow: hidden;
+    background-color: #EAEDED;
+    margin-bottom: 0 !important;
+    margin: 0 auto;
+}
+
+.MainPanelContainer {
+    margin: 0 auto;
+    width: 100%;
+    margin-top: 2%;
+    grid-area: header;
+    max-width: 1100px;
+    position: relative;
+    display: flex;
+}
+
+.newAccountBox {
+    width: 250px;
+    margin: 14px 6px 0 0;
+    font-family: "Merriweather", "Georgia", serif;
+    float: right;
+    position: sticky;
+    padding: 24px;
+    background: #FFFFFF;
+    border: 1px solid #D8D8D8;
+    border-radius: 10px;
+    z-index: 1;
+}
+
+.newAccountBox h2 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    padding-top: 4px;
+    padding-bottom: 14px;
+    text-align: center
+}
+
+.legalMessage {
+    font-size: 12px;
+    text-align: center;
+    font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
+    color: #999999;
+}
+
+.u-topGrayBorder {
+    border-top: 1px solid #D8D8D8;
+}
+
+.u-marginTopLarge {
+    margin-top: 24px;
+    font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
+}
+
+#signIn {
+    font-size: 16px;
+    text-align: center;
+    font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
+    padding-top: 24px;
+}
+
+.panel {
+    position: relative;
+    height: 200px;
+    width: 100%;
+    background-image: linear-gradient(180deg, rgb(32, 29, 49), rgb(234, 234, 253));
+}
+
+.LabelCaption {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 15vh;
+    width: 20%;
+    height: 100%;
+    justify-content: center;
+    align-content: center;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.leftMenu {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.LocationList {
+    width: 100%;
+    height: 100%;
+    margin-left: 0;
+    padding: 0;
+}
+
+.LocationList li {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    align-items: center;
+    height: 4rem;
+    background-color: blanchedalmond;
+    margin-top: 1%;
+}
+
+.LocationList li:hover {
+    background-color: cornsilk;
+}
+
+.menuItem {
+    position: relative;
+    width: 100%;
+    height: 100px;
+}
+
+.sp {
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: 25px;
+}
+
+.my-button {
+    background: #fff;
+    border: 1px solid #ababab;
+    color: #696969;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 15px;
+}
+
+.notify {
+    background: #323232;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+    color: #fff;
+    display: inline-block;
+    font-size: 14px;
+    padding: 0.8rem 1.4rem;
+    position: absolute;
+    top: 0;
+    right: 20px;
+    transition: all 0.5s ease-in-out;
+    transform-origin: left top;
+    transform: scaleY(1);
+    z-index: 3;
+}
+
+.notify.-hidden {
+    opacity: 0;
+    transform: scaleY(0);
+}
+
+.content {
+    width: 81%;
+    white-space: pre-line;
+    word-wrap: normal;
+    word-break: break-all;
+    display: block;
+    height: auto;
+    line-height: 2;
+    margin: 0;
+}
+
+.content p {
+    margin: 0;
+    padding: 10px 0;
+}
+
+.panelHeader {
+    width: 100%;
+    max-width: 100%;
+    grid-area: header;
+    margin: 2% 2%;
+}
+
+.cardHolder {
+    margin: 10% 0;
+    max-width: 100%;
+    width: 100%;
+    margin-top: 2%;
+    grid-area: main;
+    position: relative;
+    justify-content: flex-start;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.newsAndInterView {
+    grid-area: newsSection;
+    width: 100%;
+    padding: 10px;
+}
+
+.news {
+    background-color: rgb(253, 253, 252);
+    padding: 0 10px;
+}
+
+@media only screen and (max-width:1000px) {
+    body {
+        margin: 0;
+    }
+}

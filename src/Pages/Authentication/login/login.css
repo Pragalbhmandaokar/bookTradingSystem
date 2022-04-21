@@ -1,0 +1,111 @@
+.loginContainer {
+    background-color: rgb(155, 155, 155);
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}
+
+.xChange-login {
+    position: absolute;
+    max-width: 450px;
+    width: 100%;
+    border-radius: 4px;
+    margin: 0 auto;
+    background-color: rgb(224, 224, 224);
+}
+
+.nameHolder {
+    position: fixed;
+    width: 50%;
+    height: 100%;
+    background-color: black;
+}
+
+.nameHolder p {
+    padding: 0;
+    margin-left: 10%;
+    font-size: x-large;
+}
+
+.AuthButtons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 40%;
+    width: 80%;
+    padding: 10px;
+    border-bottom: 0.5px rgb(177, 177, 177) solid;
+}
+
+.AuthButtons p {
+    padding: 20px;
+    margin: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-style: bold;
+    font-size: x-large;
+}
+
+.AuthButtons button {
+    height: 50px;
+    width: 200px;
+    margin: 10px;
+}
+
+.formContainer {
+    width: 100%;
+    max-width: 80%;
+}
+
+.xChange-login form {
+    font: 400 12px/16px "Roboto"Helvetica, Arial, sans-serif;
+    padding: 10px;
+    justify-content: center;
+}
+
+p {
+    font: 400 12px/16px "Roboto", Helvetica, Arial, sans-serif;
+    padding: 10px;
+}
+
+fieldset {
+    border: none;
+}
+
+.xChange-login form button {
+    width: 100px;
+    margin-top: 2%;
+    height: 30px;
+}
+
+input {
+    min-width: 100%;
+    width: 150px;
+    height: 40px;
+    border: none;
+    border-radius: 2px;
+    padding: 10px;
+}
+
+.SubmitContainer span {
+    font: 400 12px/16px "Roboto", Helvetica, Arial, sans-serif;
+    padding: 10px;
+}
+
+.SubmitContainer {
+    margin-top: 10px;
+    height: 40px;
+    width: 100%;
+}
+
+.Capacha {
+    min-height: 10px;
+    width: 100%;
+}
+
+.formFooter {
+    height: 100px;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    display: flex;
+}

@@ -1,0 +1,32 @@
+.FooterContainer {
+    display: grid;
+    grid-template-columns: 20% auto auto auto;
+    background-color: rgb(202, 228, 250);
+    padding: 2%;
+}
+
+.FooterContainer ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.FooterList {
+    padding: 0;
+    list-style: none;
+    margin: 10px;
+    color: black;
+    display: flex;
+    flex-direction: column;
+}
+
+.FooterList li a {
+    list-style: none;
+    color: black;
+}
+
+.Connect {
+    display: flex;
+    flex-direction: row;
+}

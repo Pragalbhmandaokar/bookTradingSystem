@@ -1,0 +1,107 @@
+.productContainer {
+    width: 100%;
+    height: 80%;
+    display: grid;
+    grid-template-areas: 'picture main order' 'picture main order' 'comment comment comment';
+    grid-template-columns: 2fr 3fr 1.5fr;
+    position: fixed;
+}
+
+.ProductImage {
+    grid-area: picture;
+    display: flex;
+    justify-content: center;
+    margin: 5%;
+    align-items: center;
+}
+
+.ProductImage img {
+    margin: 0;
+    position: sticky;
+    width: 400px;
+    height: 100%;
+}
+
+.ProductInformation {
+    grid-area: main;
+}
+
+.shareOptions {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background-color: honeydew;
+}
+
+.ProductTitle {
+    margin: 5%;
+    padding: 10px;
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.267);
+}
+
+.ProductTitle p {
+    margin: 0;
+    padding: 10px 0px;
+}
+
+.commentSection {
+    grid-area: comment;
+}
+
+.Aboutproduct {
+    margin: 5%;
+}
+
+.CompareProduct {
+    margin: 5%;
+}
+
+.orderpanel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    width: 50%;
+    height: 50%;
+    grid-area: order;
+    margin: 5%;
+    height: auto;
+}
+
+.ProductRequest {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 60%;
+    background-color: rgb(214, 214, 214);
+    border-radius: 5px;
+}
+
+.exchange {
+    text-align: center;
+    width: 100%;
+    overflow: hidden;
+    margin: 2px;
+    height: 10%;
+    background-color: hotpink;
+    transition: 0.2s;
+}
+
+.active {
+    height: 50%;
+    top: 0;
+    transition: 250ms;
+}
+
+.offerMoney {
+    text-align: center;
+    width: 100%;
+    margin: 2px;
+}
+
+.advertisement {
+    height: 50%;
+    width: 80%;
+}
