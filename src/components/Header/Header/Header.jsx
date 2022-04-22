@@ -20,7 +20,7 @@ export default function Header({ toggleState, setToggleState }) {
   }, []);
 
   return (
-    <div className="containerHeader">
+    <div className="containerHeader fixed">
       <ul className="Header">
         <li>
           <div className="logo">
