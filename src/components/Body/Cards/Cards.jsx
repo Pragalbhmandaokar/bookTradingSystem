@@ -45,22 +45,25 @@ function Cards({PageBehaviour,setToggleState,username,bookCoverLink,getTradeBook
         );
     }else{
         return (
-            <div className="cardContainer smallSize">
-                <div className="cardInsider">
-                    <div className="cardImage">
-                            <img src={bookCoverLink}></img>
-                    </div>
-                    <div className="CardNameHolder">
-                        <p>In Offer</p>
-                       {/* <h4  >{username}</h4>
+          <div className="bg-slate-400 w-[8vw] py-2 h-26 rounded-lg">
+            <div className="w-full h-full px-2">
+              <div className="bg-white ">
+                <img src={bookCoverLink}></img>
+              </div>
+              <div className="w-full h-full">
+                <div className="prose prose-stone">In Offer</div>
+                {/* <h4  >{username}</h4>
                        <h4>Product name</h4> */}
-                       <button onClick={()=>onButtonClick(true)}>Trade</button>
-                      
-                    </div> 
-                </div>
+                <button
+                  className="bg-white w-full hover:bg-gray-100 text-gray-800 font-semibold border border-gray-400 rounded shadow"
+                  onClick={() => onButtonClick(true)}
+                >
+                  Trade
+                </button>
+              </div>
             </div>
-
-    )
+          </div>
+        );
         }
     }
 
