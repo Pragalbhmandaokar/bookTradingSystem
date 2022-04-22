@@ -54,10 +54,24 @@ export default function Trade({ toggleState, setToggleState, bookDetails }) {
             </div>
             <ul>
               <li>
-                <button onClick={ToggleTrade}>Trade</button>
+                <button
+                  className={
+                    "ml-2 p-2 pl-5 pr-5 border-2 hover:bg-yellow-500 hover:test-gray-100 focus:border-4 focus:border-yellow-300"
+                  }
+                  onClick={ToggleTrade}
+                >
+                  Trade
+                </button>
               </li>
               <li>
-                <button onClick={TogglePayment}>Offer money</button>
+                <button
+                  className={
+                    "ml-2 p-2 pl-5 pr-5 border-2 hover:bg-yellow-500 hover:test-gray-100 focus:border-4 focus:border-yellow-300"
+                  }
+                  onClick={TogglePayment}
+                >
+                  Offer money
+                </button>
               </li>
             </ul>
           </div>
