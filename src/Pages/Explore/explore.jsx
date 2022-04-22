@@ -15,7 +15,6 @@ function Explore() {
   const [dbCheck, GetDbCheck] = useState([]);
 
   useEffect(() => {
-    
     Axios.get("http://localhost:4000/product").then((Response) => {
       async function getData() {
         GetDbCheck(Response.data.message);
@@ -33,7 +32,7 @@ function Explore() {
             setToggleState={setToggleState}
           ></Header>
           <News></News>
-         
+
           <div className="container mt-10">
             {/* Book description in here */}
             <div className="panelHeader">
@@ -100,6 +99,8 @@ function Explore() {
                     setToggleState={setToggleState}
                     username={val.booksName}
                     bookCoverLink={val.links}
+                    collectionId={val.collectionId}
+                    bookId={val.id}
                   ></Cards>
                 );
               })}
