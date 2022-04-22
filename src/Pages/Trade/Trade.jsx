@@ -24,21 +24,23 @@ export default function Trade({ toggleState, setToggleState, bookDetails }) {
   const TogglePayment = () => {
     GetTradeCheck(false);
   };
-  
-    useEffect(() => {
-      let userId = 2;
-      if(userDetails.user){
-        userId = userDetails.user.userId;
-      }
-      Axios.get(`http://localhost:4000/selectBookByUserId/${userId}`).then((Response) => {
+
+  useEffect(() => {
+    let userId = 2;
+    if (userDetails.user) {
+      userId = userDetails.user.userId;
+    }
+    Axios.get(`http://localhost:4000/selectBookByUserId/${userId}`).then(
+      (Response) => {
         console.log(Response.data);
         async function getData() {
           console.log(Response.data.message);
           GetDbCheck(Response.data.message);
         }
         getData();
-      });
-    }, []);
+      }
+    );
+  }, []);
 
   return (
     <div
@@ -71,6 +73,8 @@ export default function Trade({ toggleState, setToggleState, bookDetails }) {
                       PageBehaviour={false}
                       setToggleState={setToggleState}
                       username={val.booksName}
+                      collectionId={val.collectionId}
+                      bookId={val.id}
                       bookCoverLink={val.links}
                     ></Cards>
                   );
