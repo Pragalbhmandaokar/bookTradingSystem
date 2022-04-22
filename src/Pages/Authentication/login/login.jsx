@@ -13,17 +13,25 @@ function Login(){
   const handleSubmit = (e) =>{
     e.preventDefault();
   }
-  const LogindbFunction= (e)=>{
+  const LogindbFunction= ()=>{
     Axios.post('http://localhost:4000/login',{
         username: username,
         password: password,
       }).then((Response)=>{
-        dispatch(login({
-          name: username,
-          loggedIn: true
-        }));
-        console.log(Response);
-        navigate("/");
+       
+        console.log(Response.data.userDetail.userid);
+        if (Response.data.message == "Invalid email address : user not found"){
+
+        }else{
+           dispatch(
+             login({
+               userId: Response.data.userDetail.userid,
+               name: username,
+               loggedIn: true,
+             })
+           );
+          navigate("/");
+        }
       })
     };
         return (

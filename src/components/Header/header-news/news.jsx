@@ -6,13 +6,13 @@ import { useSelector } from "react-redux";
 import Notification from "../../../Pages/notification/notification";
 export default function News() {
   const userDetails = useSelector((state) => state.user);
-   const [notificationPanel, setNotificationPanel] = useState(true);
+   const [notificationPanel, setNotificationPanel] = useState(false);
    const notificationController = () => {
      setNotificationPanel(!notificationPanel);
    };
   return (
     <div>
-      <div className="NewsTitle">
+      <div className="NewsTitle fixed">
         <ul className="header-tool__services">
           <li></li>
           <li>

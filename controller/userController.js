@@ -21,3 +21,27 @@ exports.userSelectAll = async(req,res)=>{
         return;
     }
 }
+
+exports.usersBookSelectByID = async(req,res) =>{
+    connection.getConnection(function(err){
+        if(err){
+            return res.json({message: "connecton err"});
+        }
+    });
+
+    try {
+        connection.query(
+          "SELECt * from `bookscollection` where collectionId=?",
+          [req.params.userId],
+          (err, result) => {
+            if (err) {
+              return res.json({ message: "Fetch : " + err });
+            } else {
+              return res.json({ message: result });
+            }
+          }
+        );
+    } catch (error) {
+        res.json({message: "error fetch book by id"});
+    }
+}

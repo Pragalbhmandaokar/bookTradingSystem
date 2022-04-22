@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { body } = require("express-validator");
 const { register, login } = require("./controller/adminController");
+const {usersBookSelectByID} = require('./controller/userController');
 const {
   tradeBook,
   tradeUpdate,
@@ -14,12 +15,11 @@ router.post(
     body("email", "Invalid email address").notEmpty().escape().trim().isEmail(),
     body("password", "The Password must be of minimum 4 characters length")
       .notEmpty()
-      .trim()
-      .isLength({ min: 4 }),
   ],
   login
 );
 
+router.get("/selectBookByUserId/:userId",usersBookSelectByID);
 router.post("/BookTrade", tradeBook);
 router.get("/userAllSelect", userSelectAll);
 router.post("/updateTradeStatus", updateTradeStatus);

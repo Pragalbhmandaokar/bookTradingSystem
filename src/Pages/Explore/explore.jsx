@@ -5,7 +5,7 @@ import Cards from "../../components/Body/Cards/Cards";
 import News from "../../components/Header/header-news/news";
 import Header from "../../components/Header/Header/Header";
 import Footer from "../footer/footer";
-import Notification from "../notification/notification";
+
 import { useSelector } from "react-redux";
 
 function Explore() {
@@ -13,8 +13,9 @@ function Explore() {
   console.log(userDetails);
   const [toggleState, setToggleState] = useState(false);
   const [dbCheck, GetDbCheck] = useState([]);
-  const [notificationPanel, setNotificationPanel] = useState(true);
+
   useEffect(() => {
+    
     Axios.get("http://localhost:4000/product").then((Response) => {
       async function getData() {
         GetDbCheck(Response.data.message);
@@ -22,9 +23,7 @@ function Explore() {
       getData();
     });
   }, []);
-  const notificationController = () => {
-    setNotificationPanel(!notificationPanel);
-  };
+
   {
     if (dbCheck.length > 0) {
       return (
@@ -33,9 +32,9 @@ function Explore() {
             toggleState={toggleState}
             setToggleState={setToggleState}
           ></Header>
-          <News setNotificationPanel={setNotificationPanel}></News>
+          <News></News>
          
-          <div className="container">
+          <div className="container mt-10">
             {/* Book description in here */}
             <div className="panelHeader">
               <h2>Discover book you need</h2>

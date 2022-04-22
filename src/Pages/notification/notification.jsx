@@ -3,19 +3,19 @@ import "./notification.css";
 
 export default function Notification({ setNotificationPanel }) {
   const [seeAllNotification,SetSeeAll] = useState(false);
-  function closeNotificationPanel(){
-    setNotificationPanel(false);
+  function SeeAllNotificationPanel(){
+    SetSeeAll(!seeAllNotification);
   }
   return (
     <div className="relative flex justify-end w-screen delay-75 transition-all">
       <div className="relative my-2">
         <div
           x-show="dropdownOpen"
-          className="fixed inset-0 h-84 top-28 w-full z-10 bg-neutral-800/50"
+          className="fixed inset-0 h-84 top-24 w-full z-10 bg-neutral-800/50"
         ></div>
         <div
           x-show="dropdownOpen"
-          className="absolute right-64 top-0 mt-2 bg-white rounded-md shadow-lg overflow-hidden z-20"
+          className="absolute right-64 top-10 mt-2 bg-white rounded-md shadow-lg overflow-hidden z-20"
         >
           <div className="py-2">
             <a
