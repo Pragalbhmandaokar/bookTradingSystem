@@ -71,6 +71,26 @@ app.post("/registration", async (req, res) => {
   }
 });
 
+app.post("/trade",(req,res) => {
+  const lid = req.body.lid;
+  const rid = req.body.rid;
+  const lbookid = req.body.lbookid;
+  const rbookid = req.body.rbookid;
+  const BOOK_UPDATE = "UPDATE bookscollection SET collectionId=(?) WHERE id=(?)";
+  connection.query(BOOK_UPDATE,[lid,rbookid],(err, result) => {
+    if (err) {
+      return result.send(err);
+    } else {
+    }
+  })
+  connection.query(BOOK_UPDATE,[rid,lbookid],(err, result) => {
+    if (err) {
+      return result.send(err);
+    } else {
+    }
+  })
+})
+
 app.get("/uploadItem", (req, res) => {
   const ProductImage = req.body.Image;
   const ProductName = req.body.productName;
