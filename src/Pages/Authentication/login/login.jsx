@@ -22,6 +22,8 @@ function Login(){
         if (Response.data.message == "Invalid email address : user not found" || Response.data.message == "Incorrect password"){
           setErrorHandling(Response.data.message);
         }else{
+          localStorage.setItem("user", Response.data.userDetail.userid);
+          console.log(Response.data.userDetail);
            dispatch(
              login({
                userId: Response.data.userDetail.userid,
@@ -29,7 +31,7 @@ function Login(){
                loggedIn: true,
              })
            );
-          localStorage.setItem("user", Response.data.userDetail);
+          
           navigate("/");
         }
       })

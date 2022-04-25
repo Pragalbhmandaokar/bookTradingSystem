@@ -1,7 +1,7 @@
 .headerComponents {
     position: sticky;
     width: 100%;
-    z-index: 1;
+    z-index: -1;
     margin: 0;
     top: 0;
     height: 15vh;
@@ -207,16 +207,22 @@
     display: flex;
     flex-wrap: wrap;
 }
+.gradient {
+  background-image: linear-gradient(
+    to bottom,
+    rgba(243, 244, 246, 0.1),
+    rgba(0, 0, 0, 0.7)
+  );
+}
+
+.group:hover .group-hover\:translate-y-0 {
+  transform: translateY(0);
+}
 
 .newsAndInterView {
     grid-area: newsSection;
     width: 100%;
     padding: 10px;
-}
-
-.news {
-    background-color: rgb(253, 253, 252);
-    padding: 0 10px;
 }
 
 @media only screen and (max-width:1000px) {
