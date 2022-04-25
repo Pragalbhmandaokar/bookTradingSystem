@@ -9,7 +9,7 @@ export default function Trade({ toggleState, setToggleState, bookDetails }) {
   const [tradeCheck, GetTradeCheck] = useState(true);
   const [TradeBookPrice, getTradeBookPrice] = useState([]);
   const userDetails = useSelector((state) => state.user);
-  console.log(userDetails);
+  
   const TradeBook = (data) => {
     getTradeBookPrice(data);
   };
@@ -24,21 +24,24 @@ export default function Trade({ toggleState, setToggleState, bookDetails }) {
   const TogglePayment = () => {
     GetTradeCheck(false);
   };
+
   
-    useEffect(() => {
-      let userId = 2;
-      if(userDetails.user){
-        userId = userDetails.user.userId;
-      }
-      Axios.get(`http://localhost:4000/selectBookByUserId/${userId}`).then((Response) => {
-        console.log(Response.data);
+  
+  useEffect(() => {
+    let userId = 2;
+    if (userDetails.user) {
+      userId = userDetails.user.userId;
+    }
+    Axios.get(`http://localhost:4000/selectBookByUserId/${userId}`).then(
+      (Response) => {
         async function getData() {
-          console.log(Response.data.message);
           GetDbCheck(Response.data.message);
         }
         getData();
-      });
-    }, []);
+      }
+    );
+  }, []);
+
 
   return (
     <div
@@ -79,12 +82,15 @@ export default function Trade({ toggleState, setToggleState, bookDetails }) {
             <div className="service-trade-panel__container">
               <p>Your Inventory</p>
               <div className="Container-space">
-                {dbCheck.map((val) => {
+                {dbCheck.map((val,index) => {
                   return (
                     <Cards
+                      key={index}
                       PageBehaviour={false}
                       setToggleState={setToggleState}
                       username={val.booksName}
+                      collectionId={val.collectionId}
+                      bookId={val.id}
                       bookCoverLink={val.links}
                     ></Cards>
                   );
@@ -135,7 +141,6 @@ export default function Trade({ toggleState, setToggleState, bookDetails }) {
       ) : (
         <div className="text-3xl">
           <div>
-            {" "}
             <div className="logo" onClick={() => onButtonClick(false)}>
               Close
             </div>
