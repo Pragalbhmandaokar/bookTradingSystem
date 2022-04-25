@@ -12,43 +12,41 @@ function Cards({
   bookCoverLink,
   collectionId,
   bookId,
-  getTradeBookPrice,
-  key
+  key,
+  getReferesh
 }) {
-  const bookDetails = useSelector((state)=> state.bookDetails);
- 
- 
+  const bookDetails = useSelector((state) => state.bookDetails);
   const dispatch = useDispatch();
   const Explore = PageBehaviour;
   const onButtonClick = (mode) => {
     setToggleState(mode);
   };
 
-  const SwapBook =()=>{
-    var lid = 0;
-    var lbookid = "";
-    var rid = 0;
-    var rbookid = "";
-      Axios.post("http://localhost:4000/trade", {
-        lid: bookDetails.collectionId,
-        rid: rid,
-        lbookid: bookDetails.id,
-        rbookid: rbookid,
-      }).then((Response) => {
-      
-      });
-  }
+  const SwapBook = () => {
+    Axios.post("http://localhost:4000/trade", {
+      lid: bookDetails.bookDetails.bookTradeLenderId,
+      rid: collectionId,
+      lbookid: bookDetails.bookDetails.bookTradeId,
+      rbookid: bookId,
+    }).then((Response) => {
+        getReferesh(true);
+    });
+  
+  };
+ function refreshPage(mode) {
+   getReferesh(mode);
+ }
 
-  const AddBookExplore=(bookId)=>{
+  const AddBookExplore = (bookId) => {
     const bookIdToTrade = bookId;
-     dispatch(
-       addBookFromTrade({
-         bookTradeId: bookIdToTrade,
-         bookTradeLenderId:collectionId,
-         bookTrade: true,
-       })
-     );
-  }
+    dispatch(
+      addBookFromTrade({
+        bookTradeId: bookIdToTrade,
+        bookTradeLenderId: collectionId,
+        bookTrade: true,
+      })
+    );
+  };
   if (Explore) {
     return (
       <div className="cardContainer" id={`${key}`}>
@@ -96,9 +94,16 @@ function Cards({
           </div>
           <div className="CardNameHolder">
             <p>In Offer</p>
-             {/* <h4  >{username}</h4> */}
-                     
-            <button onClick={() => {SwapBook(bookId);}}>Trade</button>
+            {/* <h4  >{username}</h4> */}
+
+            <button
+              onClick={() => {
+                SwapBook(bookId);
+                refreshPage(true);
+              }}
+            >
+              Trade
+            </button>
           </div>
         </div>
       </div>

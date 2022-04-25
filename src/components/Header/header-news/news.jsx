@@ -14,36 +14,29 @@ export default function News() {
     <div>
       <div className="NewsTitle fixed">
         <ul className="header-tool__services">
-          <li></li>
-          <li>
-            <span className="header-tool__helpService">
-              <Link to="/services">Nagpur</Link>
-            </span>
-          </li>
-          <li>
-            <span className="header-tool__helpService">
-              <Link to="/services">Wardha</Link>
-            </span>
-          </li>
-          <li>
-            <span className="header-tool__helpService text-black">
-              <Link to="/services">GHRCE</Link>
-            </span>
-          </li>
-          <li>
-            <span className="header-tool__helpService">
-              <Link to="/services">Pheniox</Link>
+          <li className="h-full p-[1px] bg-gradient-to-r from-[#C537AE] via-[#8217DE] to-[#ff5800]">
+            <span className="w-36 h-full mt-2 bg-[#eaeded] text-center">
+              <Link to="/services" className="w-18   text-black">
+                GHRCE
+              </Link>
             </span>
           </li>
         </ul>
 
         <ul className="Header-tools-tools text-black">
-         
-            <Button type="button" className="btn btn-primary " onClick={notificationController}>
-              Notifications <span className="badge badge-light ">0</span>
-            </Button>
-         
-          {userDetails ? (
+          <Button
+            type="button"
+            className="btn btn-primary "
+            onClick={notificationController}
+          >
+            Notifications <span className="badge badge-light ">0</span>
+          </Button>
+
+          {userDetails.user && userDetails.user.loggedIn ? (
+            <div className="flex justify-center items-center px-2 bg-white h-8 w-auto rounded-sm mx-2 ">
+              {userDetails && userDetails.user ? userDetails.user.name : "profile name"}
+            </div>
+          ) : (
             <Link to="/signup">
               <Button
                 type="button"
@@ -52,10 +45,6 @@ export default function News() {
                 signup
               </Button>
             </Link>
-          ) : (
-            <Button type="button" className="btn btn-Basecolor  long">
-              profile name
-            </Button>
           )}
         </ul>
       </div>

@@ -5,6 +5,7 @@ import "./Trade.css";
 import { useSelector } from "react-redux";
 
 export default function Trade({ toggleState, setToggleState, bookDetails }) {
+  const [refresh,getReferesh] = useState(false);
   const [dbCheck, GetDbCheck] = useState([]);
   const [tradeCheck, GetTradeCheck] = useState(true);
   const [TradeBookPrice, getTradeBookPrice] = useState([]);
@@ -25,23 +26,29 @@ export default function Trade({ toggleState, setToggleState, bookDetails }) {
     GetTradeCheck(false);
   };
 
-  
-  
   useEffect(() => {
     let userId = 2;
-    if (userDetails.user) {
+    if (userDetails.user != null) {
       userId = userDetails.user.userId;
     }
     Axios.get(`http://localhost:4000/selectBookByUserId/${userId}`).then(
       (Response) => {
-        async function getData() {
           GetDbCheck(Response.data.message);
-        }
-        getData();
       }
     );
   }, []);
 
+  function refreshDb(){
+    let userId = 2;
+    if (userDetails.user != null) {
+      userId = userDetails.user.userId;
+    }
+    Axios.get(`http://localhost:4000/selectBookByUserId/${userId}`).then(
+      (Response) => {
+          GetDbCheck(Response.data.message);
+      }
+    );
+  }
 
   return (
     <div
@@ -92,6 +99,7 @@ export default function Trade({ toggleState, setToggleState, bookDetails }) {
                       collectionId={val.collectionId}
                       bookId={val.id}
                       bookCoverLink={val.links}
+                      getReferesh={getReferesh}
                     ></Cards>
                   );
                 })}

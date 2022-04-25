@@ -86,18 +86,13 @@ exports.login = async(req, res, next) => {
             message: "Invalid email address : user not found",
         });
     }
-    if (row[0].account_status == 0) {
-        return res.json({
-            message: "Account is inactive"
-        });
-    }
-
+  
         const userDetails = {
             userid: row[0].id,
             email: row[0].username,
             password: row[0].password
         }
-        
+          console.log(userDetails);
         if (req.body.password !== userDetails.password) {
                 return res.json({
                     message: "Incorrect password"
