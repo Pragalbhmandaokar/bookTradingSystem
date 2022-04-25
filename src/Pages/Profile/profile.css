@@ -95,13 +95,11 @@
 }
 
 .item_holder {
-    margin-top: 1%;
     display: flex;
     max-width: 80%;
     margin: 0%;
     flex-wrap: wrap;
-    justify-content: flex-start;
-    align-content: space-around;
+ 
     justify-content: flex-start;
 }
 

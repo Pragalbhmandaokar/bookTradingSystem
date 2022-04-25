@@ -64,12 +64,10 @@ function Explore() {
               </div>
             </div>
             {/* Tried something different login style in below division In future case to modify */}
-            <div className="MainPanelContainer">
-            
-            </div>
+            <div className="MainPanelContainer"></div>
             <div className="cardHolder">
               {/* <Cards PageBehaviour={true} setToggleState={setToggleState} username={"Pragalbh"}></Cards> */}
-              {dbCheck.map((val,index) => {
+              {dbCheck.map((val, index) => {
                 return (
                   <Cards
                     getReferesh={getReferesh}
@@ -84,14 +82,41 @@ function Explore() {
                 );
               })}
             </div>
-            <div className="newsAndInterView">
-              <div className="news">
-                <h5>news and interesting</h5>
-                <div className="annoncement">
-                  <p>Connect with the world in different way</p>
-                </div>
-                <div className="author">
-                  <p>Are you author or publisher?</p>
+            <div className="newsAndInterView bg-gray-800 text-white">
+              <div className="bg-gray-800">
+                <div>news and interesting</div>
+                <div class="bg-gray-800 ">
+                  <div class="max-w-screen-xl mx-2 pt-2 pb-4">
+                    <div class="flex flex-wrap md:flex-col md:-mx-2">
+                      <div class="w-full mb-4 lg:mb-4">
+                        <a
+                          href="#"
+                          class="h-10 md:h-48 block group relative mx-2 overflow-hidden shadow-lg"
+                        >
+                          <img
+                            src="https://images.unsplash.com/photo-1633265486064-086b219458ec?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&h=384&q=80"
+                            class="absolute z-0 object-cover w-full h-72 md:h-96 transform group-hover:scale-150"
+                          />
+                          <div class="absolute gradient transition duration-300 group-hover:bg-black group-hover:opacity-90 w-full h-72 md:h-96 z-10"></div>
+                          <div class="absolute left-0 right-0 bottom-0 p-6 z-30 transform translate-y-1/2 transition duration-300 h-full group-hover:translate-y-0 delay-100">
+                            <div class="h-1/2 mt-4 relative">
+                              <div class="absolute bottom-0">
+                                <h2 class="font-bold text-white leading-tight transition duration-300 text-xl pb-6 group-hover:underline">
+                                  New book is avaliable to swap
+                                </h2>
+                              </div>
+                            </div>
+                            <div class="h-2/2">
+                              <button class="bg-white text-black text-sm px-3 py-1 font-semibold opacity-0 transition duration-300 group-hover:opacity-100 border-2 border-white focus:border-black focus:bg-gray-300">
+                                Place
+                              </button>
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                      
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
