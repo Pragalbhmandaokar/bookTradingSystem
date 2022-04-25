@@ -9,7 +9,8 @@ export default function Profile() {
   const userVisit = false;
   const index = 10;
   useEffect(() => {
-    Axios.get("http://localhost:4000/product").then((Response) => {
+    const userid = 2;
+    Axios.get(`http://localhost:4000/product/:${userid}`).then((Response) => {
       async function getData() {
         GetDbCheck(Response.data.message);
       }

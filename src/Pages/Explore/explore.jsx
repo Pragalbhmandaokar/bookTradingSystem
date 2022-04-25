@@ -10,13 +10,20 @@ import { useSelector } from "react-redux";
 
 function Explore() {
   const userDetails = useSelector((state) => state.user);
-  console.log(userDetails);
   const [toggleState, setToggleState] = useState(false);
   const [dbCheck, GetDbCheck] = useState([]);
+  const [refresh, getReferesh] = useState(false);
 
   useEffect(() => {
-    Axios.get("http://localhost:4000/product").then((Response) => {
+    let userId = null;
+    if (userDetails.user != null) {
+      if (Object.keys(userDetails.user).length > 0) {
+        userId = userDetails.user.userId;
+      }
+    }
+    Axios.get(`http://localhost:4000/product/${userId}`).then((Response) => {
       async function getData() {
+        console.log(Response.data.message);
         GetDbCheck(Response.data.message);
       }
       getData();
@@ -58,43 +65,14 @@ function Explore() {
             </div>
             {/* Tried something different login style in below division In future case to modify */}
             <div className="MainPanelContainer">
-              {/* <div className="panel">
-                        <div className='newAccountBox'>
-                                <h2>
-                                Discover and read more
-                                </h2>
-                                <div>
-                                <div className='signInUsingContent'>
-                                </div>
-                                    <a><li>Facebook login</li></a>
-                                    <a><li>Facebook login</li></a>
-                                    <a><li>Facebook login</li></a>
-                                </div>
-                                <div id='legal'>
-                                <div className='legalMessage'>
-                                By creating an account, you agree to the Goodreads
-                                <a target="_blank" className="gr-hyperlink" rel="noopener noreferrer" href="/about/terms">Terms of Service</a>
-                                and
-                                <a target="_blank" className="gr-hyperlink" rel="noopener noreferrer" href="/about/privacy">Privacy Policy</a>.
-                                </div>
-
-                                </div>
-                                <div id='signIn'>
-                                <div className='u-topGrayBorder'>
-                                <div className='authSwitchFlow u-marginTopLarge'>
-                                Already a member?
-                                <a className="gr-hyperlink" href="/user/sign_in">Sign In</a>
-                                </div>
-                                </div>
-                            </div>
-                            </div>
-                      </div> */}
+            
             </div>
             <div className="cardHolder">
               {/* <Cards PageBehaviour={true} setToggleState={setToggleState} username={"Pragalbh"}></Cards> */}
               {dbCheck.map((val,index) => {
                 return (
                   <Cards
+                    getReferesh={getReferesh}
                     key={index}
                     PageBehaviour={true}
                     setToggleState={setToggleState}

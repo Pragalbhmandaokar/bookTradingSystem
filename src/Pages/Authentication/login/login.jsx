@@ -7,6 +7,7 @@ import {useNavigate} from "react-router-dom";
 function Login(){
   const [username,SetUsername] = useState("");
   const [password,SetPassword] = useState("");
+  const [errorHandling,setErrorHandling] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -18,10 +19,8 @@ function Login(){
         username: username,
         password: password,
       }).then((Response)=>{
-       
-        console.log(Response.data.userDetail.userid);
-        if (Response.data.message == "Invalid email address : user not found"){
-
+        if (Response.data.message == "Invalid email address : user not found" || Response.data.message == "Incorrect password"){
+          setErrorHandling(Response.data.message);
         }else{
            dispatch(
              login({
@@ -30,6 +29,7 @@ function Login(){
                loggedIn: true,
              })
            );
+          localStorage.setItem("user", Response.data.userDetail);
           navigate("/");
         }
       })
@@ -37,48 +37,55 @@ function Login(){
         return (
           <div className="loginContainer">
             <div className="nameHolder">
-              <p><a href="/">ConnectPage</a></p>
+              <p>
+                <a href="/">ConnectPage</a>
+              </p>
             </div>
             <div className="xChange-login">
               <div className="AuthButtons">
                 <p>Login to ConnectPage</p>
-    
+
                 <button>Continue with Google</button>
               </div>
               <div className="formContainer">
                 <form onSubmit={(e) => handleSubmit(e)}>
-                    <p>Email address</p>
-                    <input className="xChange-Login__Username"
+                  <p>Email address</p>
+                  <input
+                    className="xChange-Login__Username"
                     type="text"
                     placeholder="Email"
-                    onChange={(e)=>{
-                        SetUsername(e.target.value);
-                    }} />
+                    onChange={(e) => {
+                      SetUsername(e.target.value);
+                    }}
+                  />
                   <p>Password</p>
-                    <input
-                      placeholder="password"
-                      type="password"
-                      tabindex="1"
-                      onChange={(e)=>{
-                        SetPassword(e.target.value);
-                      }} 
-                      required autofocus />
+                  <input
+                    placeholder="password"
+                    type="password"
+                    tabindex="1"
+                    onChange={(e) => {
+                      SetPassword(e.target.value);
+                    }}
+                    required
+                    autofocus
+                  />
                   <div className="Capacha"></div>
                   <div className="SubmitContainer">
                     <button onClick={LogindbFunction}>Login</button>
-                    <span>Forget password?</span> 
-
+                    <span>Forget password?</span>
+                    <p>{errorHandling}</p>
                   </div>
-                    
-                    <div className="formFooter">
-                      <p>not a member? <a href="/signup">Sign up</a></p>
-                    </div>
-                  </form>
+
+                  <div className="formFooter">
+                    <p>
+                      not a member? <a href="/signup">Sign up</a>
+                    </p>
+                  </div>
+                </form>
               </div>
-               
             </div>
-            </div>
-        )
+          </div>
+        );
     
 }
 

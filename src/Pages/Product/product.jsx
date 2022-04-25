@@ -5,7 +5,7 @@ import './product.css';
 export default function Product(props) {
     const [xchange, setxchange] = useState(false)
     function openPanel (){
-        setxchange(!xchange)
+    setxchange(!xchange)
     }
     // const {handle} = useParams();
      const { state } = props.location.state;

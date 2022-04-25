@@ -71,6 +71,32 @@ app.post("/registration", async (req, res) => {
   }
 });
 
+app.post("/trade",(req,res) => {
+  const lid = req.body.lid;
+  const rid = req.body.rid;
+  const lbookid = req.body.lbookid;
+  const rbookid = req.body.rbookid;
+  if(lid == rid){
+    return res.json({message:"books can not swap"});
+  }
+
+  const BOOK_UPDATE = "UPDATE bookscollection SET collectionId=(?) WHERE id=(?)";
+  connection.query(BOOK_UPDATE,[lid,rbookid],(err, result) => {
+    if (err) {
+      return res.send(err);
+    } else {
+       connection.query(BOOK_UPDATE, [rid, lbookid], (err, result) => {
+         if (err) {
+           return res.send(err);
+         } else {
+           res.json({message: "swapped"});
+         }
+       });
+    }
+  })
+ 
+})
+
 app.get("/uploadItem", (req, res) => {
   const ProductImage = req.body.Image;
   const ProductName = req.body.productName;
@@ -90,14 +116,24 @@ app.get("/uploadItem", (req, res) => {
   );
 });
 
-app.get("/Product", (req, res) => {
-  connection.query(Q_SELECT_ALL_PRODUCT_QUERY, (err, result) => {
-    if (err) {
-      return res.json({ message: err });
-    } else {
-      return res.json({ message: result });
-    }
-  });
+app.get("/Product/:userId", (req, res) => {
+  if(req.params.userId == null){
+    connection.query(Q_SELECT_ALL_PRODUCT_QUERY, (err, result) => {
+      if (err) {
+        return res.json({ message: err });
+      } else {
+        return res.json({ message: result });
+      }
+    });
+  }else{
+    connection.query("SELECT * FROM `bookscollection` where collectionId != (?)",[req.params.userId], (err, result) => {
+      if (err) {
+        return res.json({ message: err });
+      } else {
+        return res.json({ message: result });
+      }
+    });
+  }
 });
 
 app.listen(PORT, () => {
