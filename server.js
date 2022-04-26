@@ -94,9 +94,91 @@ app.post("/trade",(req,res) => {
        });
     }
   })
- 
-})
+});
 
+app.post("/BookTransaction",(req,res)=>{
+  const lid = req.body.lid;
+  const rid = req.body.rid;
+  const lbookid = req.body.lbookid;
+  const rbookid = req.body.rbookid;
+  const status = req.body.transactionStatus;
+
+  
+    if (lid == rid) {
+      return res.json({ message: "Books can not swap" });
+    }
+  const BookTransactionOn =
+    "INSERT into booktransaction(lid,rid,lbookid,rlookid,transactionStatus) values(?,?,?,?,?)";
+    try{
+    connection.query(BookTransactionOn,[lid,rid,lbookid,rbookid,status],(err,result)=>{
+      
+      if(err){
+        console.log(err);
+        return res.json({message: err.code});
+      }else{
+        return res.json({message: "Requested"});
+      }
+      
+    })
+  }catch(err){
+     return res.json({message : err});
+  }
+});
+app.post("/updateBookTransaction/:transactionId",(req,res)=>{
+  const transactionId = req.params.transactionId;
+  const status = req.body.status;
+  const BOOK_UPDATE =
+    "UPDATE bookTransaction SET status=(?) WHERE transactionId=(?)";
+  connection.query(BOOK_UPDATE, [status, transactionId], (err, result) => {
+    if (err) {
+      return res.send(err);
+    } else {
+          res.json({ message: "updated" });
+    }
+  });
+})
+app.get("/getNotification/:userId",(req,res)=>{
+    const userid = req.params.userId;
+    connection.query("select * from bookTransaction where lid=(?)",[userid],(err,result)=>{
+      if(err){
+        return res.json({message: "Error getting notification"});
+      }else{
+        return res.json({message: result});
+      }
+    });
+});
+
+app.get("/getUserByRid/:Rid",(req,res)=>{
+  const rId = req.params.rid;
+  connection.query("Select r.*,u.* from booktransaction as r join users as u on u.id=r.rid where r.rid=(?)",[rId],(err,result)=>{
+    if(err){
+      return res.json({message: err.code});
+    }else{
+      return res.json({message: result});
+    }
+  })
+})
+app.get("/getUserAndBookdetailsByID/:transactionId", (req, res) => {
+  try {
+    if (req.params.transactionId == null) {
+      return res.json({ message: "empty value in get user by id" });
+    }
+    connection.query(
+      "Select r.*,u.*,b.* from booktransaction as r join users as u on u.id = r.rid join bookscollection as b on b.id=r.lbookid where r.transactionId = ?",
+      [req.params.transactionId],
+      (err, result) => {
+        if (err) {
+          return res.json({ message: "error getting user" + err });
+        } else {
+          return res.json({ message: result });
+        }
+      }
+    );
+  } catch (error) {
+    console.log(error);
+    res.send(error);
+  }
+});
 app.get("/uploadItem", (req, res) => {
   const ProductImage = req.body.Image;
   const ProductName = req.body.productName;

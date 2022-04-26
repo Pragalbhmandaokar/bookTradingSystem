@@ -12,7 +12,6 @@ export default function Profile() {
   const [loggedUser,setLoggedUser] = useState([]);
    useEffect(() => {
      const loggedInUser = localStorage.getItem("user");
-     console.log(loggedInUser);
      if (loggedInUser && loggedInUser > 0) {
        const foundUser = loggedInUser;
        setLoggedUser(foundUser);

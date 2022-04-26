@@ -13,7 +13,8 @@ function Cards({
   collectionId,
   bookId,
   key,
-  getReferesh
+  getReferesh,
+  getExploreReferesh
 }) {
   const bookDetails = useSelector((state) => state.bookDetails);
   const dispatch = useDispatch();
@@ -22,20 +23,21 @@ function Cards({
     setToggleState(mode);
   };
 
-  const SwapBook = () => {
-    Axios.post("http://localhost:4000/trade", {
+  const SwapBook = (bookId) => {
+    console.log("this");
+    Axios.post("http://localhost:4000/BookTransaction", {
       lid: bookDetails.bookDetails.bookTradeLenderId,
       rid: collectionId,
       lbookid: bookDetails.bookDetails.bookTradeId,
       rbookid: bookId,
+      transactionStatus: 1,
     }).then((Response) => {
-        getReferesh(true);
+      console.log(Response.data.message);
     });
-  
   };
- function refreshPage(mode) {
-   getReferesh(mode);
- }
+  async function refreshPage(mode) {
+    getReferesh(mode);
+  }
 
   const AddBookExplore = (bookId) => {
     const bookIdToTrade = bookId;
@@ -92,18 +94,19 @@ function Cards({
           <div className="cardImage">
             <img src={bookCoverLink}></img>
           </div>
-          <div className="CardNameHolder">
+          <div className="w-full h-full">
             <p>In Offer</p>
             {/* <h4  >{username}</h4> */}
 
-            <button
+            <div
               onClick={() => {
                 SwapBook(bookId);
                 refreshPage(true);
               }}
+              className="bg-gray-600 rounded-sm"
             >
               Trade
-            </button>
+            </div>
           </div>
         </div>
       </div>

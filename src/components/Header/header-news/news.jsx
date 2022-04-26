@@ -6,10 +6,10 @@ import { useSelector } from "react-redux";
 import Notification from "../../../Pages/notification/notification";
 export default function News() {
   const userDetails = useSelector((state) => state.user);
-   const [notificationPanel, setNotificationPanel] = useState(false);
-   const notificationController = () => {
-     setNotificationPanel(!notificationPanel);
-   };
+  const [notificationPanel, setNotificationPanel] = useState(false);
+  const notificationController = () => {
+    setNotificationPanel(!notificationPanel);
+  };
   return (
     <div>
       <div className="NewsTitle fixed">
@@ -34,7 +34,9 @@ export default function News() {
 
           {userDetails.user && userDetails.user.loggedIn ? (
             <div className="flex justify-center items-center px-2 bg-white h-8 w-auto rounded-sm mx-2 ">
-              {userDetails && userDetails.user ? userDetails.user.name : "profile name"}
+              {userDetails && userDetails.user
+                ? userDetails.user.name
+                : "profile name"}
             </div>
           ) : (
             <Link to="/signup">
@@ -48,7 +50,7 @@ export default function News() {
           )}
         </ul>
       </div>
-      {notificationPanel && <Notification />}
+      {notificationPanel && <Notification userDetails={userDetails}/>}
     </div>
   );
 }

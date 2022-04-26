@@ -20,7 +20,7 @@ class App extends Component {
           <Router>
             <Routes>
               <Route exact path="/" element={<Explore />} />
-              <Route exact path="/trade" element={<Explore/>} />
+             
               <Route path="/Error404" element={<Error />} />
               <Route path="/Login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
