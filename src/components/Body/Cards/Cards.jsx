@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import {addBookFromTrade} from "../../../redux/bookManagement";
+import RequestSend from "../../popup/RequestSend";
 
 function Cards({
   PageBehaviour,
@@ -12,19 +13,23 @@ function Cards({
   bookCoverLink,
   collectionId,
   bookId,
-  key,
   getReferesh,
-  getExploreReferesh
+  getExploreReferesh,
 }) {
   const bookDetails = useSelector((state) => state.bookDetails);
   const dispatch = useDispatch();
   const Explore = PageBehaviour;
+  const [isOpen, setIsOpen] = useState(false);
+
+  const onToggleModal = () => {
+    setIsOpen(!isOpen);
+  };
+
   const onButtonClick = (mode) => {
     setToggleState(mode);
   };
 
   const SwapBook = (bookId) => {
-    console.log("this");
     Axios.post("http://localhost:4000/BookTransaction", {
       lid: bookDetails.bookDetails.bookTradeLenderId,
       rid: collectionId,
@@ -33,6 +38,7 @@ function Cards({
       transactionStatus: 1,
     }).then((Response) => {
       console.log(Response.data.message);
+      setIsOpen(true);
     });
   };
   async function refreshPage(mode) {
@@ -51,20 +57,14 @@ function Cards({
   };
   if (Explore) {
     return (
-      <div className="cardContainer" id={`${key}`}>
+      <div className="cardContainer" id={`${bookId}`}>
         <div className="cardInsider">
-          <Link
-            to={{
-              pathname: "/:product",
-              state: { id: 1, name: "Ford", color: "red" },
-            }}
-          >
-            <div className="cardImage">
-              <img src={bookCoverLink}></img>
-            </div>
-          </Link>
-          <div className="CardNameHolder">
-            <h4>{username}</h4>
+          <div className="cardImage">
+            <img src={bookCoverLink}></img>
+          </div>
+
+          <div className="CardNameHolder p-2">
+            <div className="body-1">{username}</div>
 
             <div className="CardButtonHolder h-full">
               <button
@@ -108,6 +108,15 @@ function Cards({
               Trade
             </div>
           </div>
+        </div>
+        <div>
+          {isOpen && (
+            <RequestSend
+              isModal={isOpen}
+              onToggleModal={onToggleModal}
+              key={bookId}
+            />
+          )}
         </div>
       </div>
     );

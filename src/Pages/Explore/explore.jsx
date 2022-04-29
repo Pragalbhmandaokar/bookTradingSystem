@@ -18,18 +18,22 @@ function Explore() {
 
   useEffect(() => {
     const userid = localStorage.getItem("userId");
-    if (userDetails == null) {
+    console.log(userDetails.user);
+    if (userDetails.user == null) {
       Axios.get("http://localhost:4000/getUserdetailsByID/" + userid).then(
         (response) => {
           const getState = () => {
-            console.log("userid :", userid);
+             console.log("userid :", response.data.message[0]);
+            getUser(response.data.message[0]);
             dispatch(
               login({
-                userId: response.message.id,
-                name: response.message.username,
+                userId: response.data.message[0].id,
+                name: response.data.message[0].username,
+                admin: response.data.message[0].admin,
                 loggedIn: true,
               })
             );
+            console.log(user);
           };
           getState();
         }
@@ -56,9 +60,8 @@ function Explore() {
           <Header
             toggleState={toggleState}
             setToggleState={setToggleState}
-        
           ></Header>
-          <News userDetails={userDetails}> </News>
+          <News user={user}> </News>
 
           <div className="container mt-10">
             {/* Book description in here */}
@@ -83,15 +86,13 @@ function Explore() {
                 </p>
               </div>
             </div>
-            {/* Tried something different login style in below division In future case to modify */}
             <div className="MainPanelContainer"></div>
             <div className="cardHolder">
-              {/* <Cards PageBehaviour={true} setToggleState={setToggleState} username={"Pragalbh"}></Cards> */}
               {dbCheck.map((val, index) => {
                 return (
                   <Cards
                     getExploreReferesh={getExploreReferesh}
-                    key={index}
+                  
                     PageBehaviour={true}
                     setToggleState={setToggleState}
                     username={val.booksName}
@@ -150,9 +151,14 @@ function Explore() {
       return (
         //Showing that website is in development and showing main page of website
         <div className="App">
-          <div className="container">
-            <h1>Nothing on this page</h1>
-            <h2>Database not connected</h2>
+          <Header
+            toggleState={toggleState}
+            setToggleState={setToggleState}
+          ></Header>
+          <News userDetails={userDetails}> </News>
+          <div className="flex flex-col mt-56 justify-center items-center">
+            <div className="h1-thin">Nothing on this page</div>
+            <div className="h2-thin">Database not connected</div>
           </div>
           <div className="Footer">
             <Footer></Footer>

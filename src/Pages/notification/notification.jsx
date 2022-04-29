@@ -8,40 +8,38 @@ export default function Notification({ setNotificationPanel,userDetails}) {
   const [notificationCount,setNotificationCount] = useState(2);
   const [userRequest,setUserRequest] = useState([]);
 
-
   useEffect(() => {
-    const userId = 1;
+    const userId = localStorage.getItem("userId");
     axios
       .get("http://localhost:4000/getNotification/" + userId)
       .then((response) => {
-        var unique = [];
         const getData = async () => {
-          let arr = response.data.message;
-          arr.forEach((element) => {
-            if (!unique.includes(element.rid)) {
-              unique.push(element.rid);
-              axios
-              .get(
-                `http://localhost:4000/getUserAndBookdetailsByID/${element.TransactionId}`
-              )
-              .then((response) => {
-                const putData = async () => {setUserRequest(response.data.message);}
-                putData();
-              });
-
-            }
-            
-          });
-          setNotification(response.data.message);
-        };
-        getData();
-      });
+           setNotification(response.data.message);
+          };
+          getData();
+        });
   }, []);
-
- 
 
   function SeeAllNotificationPanel(){
     SetSeeAll(!seeAllNotification);
+  }
+
+  const updateBookRequestStatus = (transactionId) =>{
+    console.log(transactionId);
+    axios
+      .post("http://localhost:4000/updateRequestNotification/" + transactionId)
+      .then((response) => {
+        console.log(response.data.message);
+        console.log("request successfull" );
+
+      });
+  }
+  
+  const removeBookRequestStatus = (transactionId)=>{
+    axios.post("http://localhost:4000/removeBookRequestStatus/"+transactionId)
+    .then((response)=>{
+      SeeAllNotificationPanel();
+    });
   }
   return (
     <div className="relative flex justify-end w-screen delay-75 transition-all">
@@ -57,7 +55,7 @@ export default function Notification({ setNotificationPanel,userDetails}) {
         >
           {notification.slice(0, notificationCount).map((val, index) => {
             return (
-              <div className="flex w-96 h-auto py-2" id={index}>
+              <div className="flex w-96 h-auto py-2" id={val.TransactionId}>
                 <div className="">
                   {" "}
                   <a
@@ -71,18 +69,12 @@ export default function Notification({ setNotificationPanel,userDetails}) {
                     />
                     <p className="text-gray-600 text-sm mx-2">
                       <span className="font-bold" href="#">
-                        <p>
-                          {userRequest[0] && userRequest[0].username
-                            ? userRequest[0].username
-                            : "username"}
-                        </p>
+                        <p>{val && val.username ? val.username : "username"}</p>
                       </span>
                       Requested on the
                       <span className="font-bold text-blue-500" href="#">
                         <p>
-                          {userRequest[0] && userRequest[0].booksName
-                            ? userRequest[0].booksName
-                            : "book name"}
+                          {val && val.booksName ? val.booksName : "book name"}
                         </p>
                       </span>
                     </p>
@@ -90,10 +82,16 @@ export default function Notification({ setNotificationPanel,userDetails}) {
                 </div>
 
                 <div className="flex flex-col w-full">
-                  <div className="flex justify-center items-center h-10 my-2 bg-teal-300">
+                  <div
+                    className="flex justify-center items-center h-10 my-2 bg-teal-300"
+                    onClick={updateBookRequestStatus(val.TransactionId)}
+                  >
                     accept
                   </div>
-                  <div className="flex justify-center items-center h-10 my-2 bg-red-200">
+                  <div
+                    className="flex justify-center items-center h-10 my-2 bg-red-200"
+                    onClick={removeBookRequestStatus(val.TransactionId)}
+                  >
                     reject
                   </div>
                 </div>

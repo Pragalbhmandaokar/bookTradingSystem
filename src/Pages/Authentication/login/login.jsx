@@ -16,15 +16,15 @@ function Login(){
   }
   const LogindbFunction= ()=>{
     Axios.post('http://localhost:4000/login',{
-        username: username,
+        email: username,
         password: password,
       }).then((Response)=>{
         if (Response.data.message == "Invalid email address : user not found" || Response.data.message == "Incorrect password"){
           setErrorHandling(Response.data.message);
         }else{
+          console.log(Response.data);
           localStorage.setItem("userId", Response.data.userDetail.userid);
-          localStorage.setItem("email",Response.data.userDetail.name);
-         
+          localStorage.setItem("username",Response.data.userDetail.username);
            dispatch(
              login({
                userId: Response.data.userDetail.userid,
