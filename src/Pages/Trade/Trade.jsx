@@ -4,13 +4,21 @@ import Cards from "../../components/Body/Cards/Cards";
 import "./Trade.css";
 import { useSelector } from "react-redux";
 
-export default function Trade({ toggleState, setToggleState, bookDetails }) {
-  const [refresh,getReferesh] = useState(false);
+export default function Trade({
+  toggleState,
+  setToggleState,
+  bookDetails,
+  getExploreReferesh,
+}) {
+  const [refresh, getReferesh] = useState(false);
   const [dbCheck, GetDbCheck] = useState([]);
   const [tradeCheck, GetTradeCheck] = useState(true);
   const [TradeBookPrice, getTradeBookPrice] = useState([]);
   const userDetails = useSelector((state) => state.user);
-  
+
+  function refreshPage() {
+    getReferesh(!refresh);
+  }
   const TradeBook = (data) => {
     getTradeBookPrice(data);
   };
@@ -27,25 +35,28 @@ export default function Trade({ toggleState, setToggleState, bookDetails }) {
   };
 
   useEffect(() => {
+    console.log("called");
     let userId = 2;
     if (userDetails.user != null) {
       userId = userDetails.user.userId;
     }
+    console.log(userId);
     Axios.get(`http://localhost:4000/selectBookByUserId/${userId}`).then(
-      (Response) => {
-          GetDbCheck(Response.data.message);
+      async (Response) => {
+        GetDbCheck(Response.data.message);
       }
     );
+    
   }, []);
 
-  function refreshDb(){
+  function refreshDb() {
     let userId = 2;
     if (userDetails.user != null) {
       userId = userDetails.user.userId;
     }
     Axios.get(`http://localhost:4000/selectBookByUserId/${userId}`).then(
       (Response) => {
-          GetDbCheck(Response.data.message);
+        GetDbCheck(Response.data.message);
       }
     );
   }
@@ -89,7 +100,7 @@ export default function Trade({ toggleState, setToggleState, bookDetails }) {
             <div className="service-trade-panel__container">
               <p>Your Inventory</p>
               <div className="Container-space">
-                {dbCheck.map((val,index) => {
+                {dbCheck.map((val, index) => {
                   return (
                     <Cards
                       key={index}
@@ -99,7 +110,7 @@ export default function Trade({ toggleState, setToggleState, bookDetails }) {
                       collectionId={val.collectionId}
                       bookId={val.id}
                       bookCoverLink={val.links}
-                      getReferesh={getReferesh}
+                      getReferesh={refreshPage}
                     ></Cards>
                   );
                 })}

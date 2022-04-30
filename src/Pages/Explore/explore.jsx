@@ -5,16 +5,40 @@ import Cards from "../../components/Body/Cards/Cards";
 import News from "../../components/Header/header-news/news";
 import Header from "../../components/Header/Header/Header";
 import Footer from "../footer/footer";
-
-import { useSelector } from "react-redux";
+import { login } from "../../redux/userSlice";
+import { useSelector,useDispatch } from "react-redux";
 
 function Explore() {
   const userDetails = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const [user,getUser] = useState([]);
   const [toggleState, setToggleState] = useState(false);
   const [dbCheck, GetDbCheck] = useState([]);
-  const [refresh, getReferesh] = useState(false);
+  const [refreshExplore, getExploreReferesh] = useState(false);
 
   useEffect(() => {
+    const userid = localStorage.getItem("userId");
+    console.log(userDetails.user);
+    if (userDetails.user == null) {
+      Axios.get("http://localhost:4000/getUserdetailsByID/" + userid).then(
+        (response) => {
+          const getState = () => {
+             console.log("userid :", response.data.message[0]);
+            getUser(response.data.message[0]);
+            dispatch(
+              login({
+                userId: response.data.message[0].id,
+                name: response.data.message[0].username,
+                admin: response.data.message[0].admin,
+                loggedIn: true,
+              })
+            );
+            console.log(user);
+          };
+          getState();
+        }
+      );
+    }
     let userId = null;
     if (userDetails.user != null) {
       if (Object.keys(userDetails.user).length > 0) {
@@ -23,13 +47,12 @@ function Explore() {
     }
     Axios.get(`http://localhost:4000/product/${userId}`).then((Response) => {
       async function getData() {
-        console.log(Response.data.message);
         GetDbCheck(Response.data.message);
       }
       getData();
     });
   }, []);
-
+ 
   {
     if (dbCheck.length > 0) {
       return (
@@ -38,7 +61,7 @@ function Explore() {
             toggleState={toggleState}
             setToggleState={setToggleState}
           ></Header>
-          <News></News>
+          <News user={user}> </News>
 
           <div className="container mt-10">
             {/* Book description in here */}
@@ -63,15 +86,13 @@ function Explore() {
                 </p>
               </div>
             </div>
-            {/* Tried something different login style in below division In future case to modify */}
             <div className="MainPanelContainer"></div>
             <div className="cardHolder">
-              {/* <Cards PageBehaviour={true} setToggleState={setToggleState} username={"Pragalbh"}></Cards> */}
               {dbCheck.map((val, index) => {
                 return (
                   <Cards
-                    getReferesh={getReferesh}
-                    key={index}
+                    getExploreReferesh={getExploreReferesh}
+                  
                     PageBehaviour={true}
                     setToggleState={setToggleState}
                     username={val.booksName}
@@ -97,8 +118,8 @@ function Explore() {
                             src="https://images.unsplash.com/photo-1633265486064-086b219458ec?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&h=384&q=80"
                             class="absolute z-0 object-cover w-full h-72 md:h-96 transform group-hover:scale-150"
                           />
-                          <div class="absolute gradient transition duration-300 group-hover:bg-black group-hover:opacity-90 w-full h-72 md:h-96 z-10"></div>
-                          <div class="absolute left-0 right-0 bottom-0 p-6 z-30 transform translate-y-1/2 transition duration-300 h-full group-hover:translate-y-0 delay-100">
+                          <div class="absolute gradient transition duration-300 group-hover:bg-black group-hover:opacity-90 w-full h-72 md:h-96"></div>
+                          <div class="absolute left-0 right-0 bottom-0 p-6 transform translate-y-1/2 transition duration-300 h-full group-hover:translate-y-0 delay-100">
                             <div class="h-1/2 mt-4 relative">
                               <div class="absolute bottom-0">
                                 <h2 class="font-bold text-white leading-tight transition duration-300 text-xl pb-6 group-hover:underline">
@@ -114,7 +135,6 @@ function Explore() {
                           </div>
                         </a>
                       </div>
-                      
                     </div>
                   </div>
                 </div>
@@ -131,9 +151,14 @@ function Explore() {
       return (
         //Showing that website is in development and showing main page of website
         <div className="App">
-          <div className="container">
-            <h1>Nothing on this page</h1>
-            <h2>Database not connected</h2>
+          <Header
+            toggleState={toggleState}
+            setToggleState={setToggleState}
+          ></Header>
+          <News userDetails={userDetails}> </News>
+          <div className="flex flex-col mt-56 justify-center items-center">
+            <div className="h1-thin">Nothing on this page</div>
+            <div className="h2-thin">Database not connected</div>
           </div>
           <div className="Footer">
             <Footer></Footer>

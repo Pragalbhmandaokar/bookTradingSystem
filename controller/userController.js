@@ -30,7 +30,6 @@ exports.usersBookSelectByID = async(req,res) =>{
     });
 
     try {
-        console.log(req.params.userId);
         connection.query(
           "SELECt * from `bookscollection` where collectionId=?",
           [req.params.userId],

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import {addBookFromTrade} from "../../../redux/bookManagement";
+import RequestSend from "../../popup/RequestSend";
 
 function Cards({
   PageBehaviour,
@@ -12,30 +13,37 @@ function Cards({
   bookCoverLink,
   collectionId,
   bookId,
-  key,
-  getReferesh
+  getReferesh,
+  getExploreReferesh,
 }) {
   const bookDetails = useSelector((state) => state.bookDetails);
   const dispatch = useDispatch();
   const Explore = PageBehaviour;
+  const [isOpen, setIsOpen] = useState(false);
+
+  const onToggleModal = () => {
+    setIsOpen(!isOpen);
+  };
+
   const onButtonClick = (mode) => {
     setToggleState(mode);
   };
 
-  const SwapBook = () => {
-    Axios.post("http://localhost:4000/trade", {
+  const SwapBook = (bookId) => {
+    Axios.post("http://localhost:4000/BookTransaction", {
       lid: bookDetails.bookDetails.bookTradeLenderId,
       rid: collectionId,
       lbookid: bookDetails.bookDetails.bookTradeId,
       rbookid: bookId,
+      transactionStatus: 1,
     }).then((Response) => {
-        getReferesh(true);
+      console.log(Response.data.message);
+      setIsOpen(true);
     });
-  
   };
- function refreshPage(mode) {
-   getReferesh(mode);
- }
+  async function refreshPage(mode) {
+    getReferesh(mode);
+  }
 
   const AddBookExplore = (bookId) => {
     const bookIdToTrade = bookId;
@@ -49,20 +57,14 @@ function Cards({
   };
   if (Explore) {
     return (
-      <div className="cardContainer" id={`${key}`}>
+      <div className="cardContainer" id={`${bookId}`}>
         <div className="cardInsider">
-          <Link
-            to={{
-              pathname: "/:product",
-              state: { id: 1, name: "Ford", color: "red" },
-            }}
-          >
-            <div className="cardImage">
-              <img src={bookCoverLink}></img>
-            </div>
-          </Link>
-          <div className="CardNameHolder">
-            <h4>{username}</h4>
+          <div className="cardImage">
+            <img src={bookCoverLink}></img>
+          </div>
+
+          <div className="CardNameHolder p-2">
+            <div className="body-1">{username}</div>
 
             <div className="CardButtonHolder h-full">
               <button
@@ -92,19 +94,29 @@ function Cards({
           <div className="cardImage">
             <img src={bookCoverLink}></img>
           </div>
-          <div className="CardNameHolder">
+          <div className="w-full h-full">
             <p>In Offer</p>
             {/* <h4  >{username}</h4> */}
 
-            <button
+            <div
               onClick={() => {
                 SwapBook(bookId);
                 refreshPage(true);
               }}
+              className="bg-gray-600 rounded-sm"
             >
               Trade
-            </button>
+            </div>
           </div>
+        </div>
+        <div>
+          {isOpen && (
+            <RequestSend
+              isModal={isOpen}
+              onToggleModal={onToggleModal}
+              key={bookId}
+            />
+          )}
         </div>
       </div>
     );

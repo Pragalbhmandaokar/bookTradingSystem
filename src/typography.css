@@ -1,0 +1,151 @@
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'aribau-black';
+}
+h1 {
+  font-size: 6rem; /* 96px */
+  line-height: 100px;
+}
+h2 {
+  font-size: 3.75rem; /* 60px */
+}
+h3 {
+  font-size: 3rem; /* 48px */
+  letter-spacing: 0.5px;
+}
+h4 {
+  font-size: 2.125rem; /* 34px */
+}
+h5 {
+  font-size: 1.5rem; /* 24px */
+}
+h6 {
+  font-size: 1.25rem; /* 20px */
+}
+.h1-thin {
+  /*extra light*/
+  font-family: 'aribau-xtlight';
+  font-size: 6rem; /* 96px */
+}
+.h2-thin {
+  /*light*/
+  font-family: 'aribau-light';
+  font-size: 3.75rem; /* 60px */
+  line-height: 70px;
+}
+.h3-thin {
+  /*light*/
+  font-family: 'aribau-light';
+  font-size: 3rem; /* 48px */
+  letter-spacing: 0.5px;
+}
+.h4-thin {
+  /*light*/
+  font-family: 'aribau-light';
+  font-size: 2.125rem; /* 34px */
+  line-height: 48px;
+}
+.h5-thin {
+  /*Normal*/
+  font-family: 'aribau-regular';
+  font-size: 1.5rem; /* 24px */
+  line-height: 34px;
+}
+.h6-thin {
+  /*Normal*/
+  font-family: 'aribau-regular';
+  font-size: 1.25rem; /* 20px */
+  line-height: 30px;
+}
+
+.body-1 {
+  font-family: 'aribau-regular';
+  font-size: 1rem; /* 16px */
+  line-height: 28px;
+}
+
+.body-2 {
+  /*medium*/
+  font-family: 'aribau-medium';
+  font-size: 0.875rem; /* 14px */
+  line-height: 18px;
+}
+
+.btn-text {
+  font-family: 'aribau-medium';
+  font-size: 0.938rem; /* 15px */
+  letter-spacing: 1px;
+}
+
+
+
+.caption {
+  /*Normal*/
+  font-family: 'aribau-regular';
+
+  font-size: 0.75rem; /* 12px */
+}
+.caption-bold {
+  /*Semi Bold*/
+  font-family: 'aribau-semibold';
+  font-size: 0.75rem; /* 12px */
+}
+.overline {
+  /*Normal*/
+  font-family: 'aribau-regular';
+  letter-spacing: 0.2em;
+  font-size: 0.625rem; /* 12px */
+  text-transform: uppercase;
+}
+@media only screen and (max-width: 767px) {
+  .h3-sm {
+    font-size: 3rem; /* 48px */
+    letter-spacing: 0.5px;
+  }
+  .h5-sm-thin {
+    font-family: 'aribau-regular';
+    font-size: 1.5rem; /* 24px */
+    line-height: 34px;
+  }
+  .body-1-sm {
+    font-family: 'aribau-regular';
+    font-size: 1rem; /* 16px */
+    line-height: 28px;
+  }
+  .body-2-sm {
+    /*medium*/
+    font-family: 'aribau-medium';
+    font-size: 0.875rem; /* 14px */
+    line-height: 18px;
+  }
+
+  .h4-sm-thin {
+    font-family: 'aribau-light';
+    font-size: 2.125rem; /* 34px */
+    line-height: 48px;
+  }
+  .h6-sm-thin {
+    font-family: 'aribau-regular';
+    font-size: 1.25rem; /* 20px */
+    line-height: 30px;
+  }
+  .h6-sm {
+    font-size: 1.25rem; /* 20px */
+  }
+  .caption-sm {
+    /*Normal*/
+    font-family: 'aribau-regular';
+  
+    font-size: 0.75rem; /* 12px */
+  }
+  .btn-sm-text {
+    font-family: 'aribau-medium';
+    font-size: 0.938rem; /* 15px */
+    letter-spacing: 1px;
+  }
+}

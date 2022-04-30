@@ -11,8 +11,7 @@ export default function Profile() {
   const userDetails = useSelector((state) => state.user);
   const [loggedUser,setLoggedUser] = useState([]);
    useEffect(() => {
-     const loggedInUser = localStorage.getItem("user");
-     console.log(loggedInUser);
+     const loggedInUser = localStorage.getItem("userId");
      if (loggedInUser && loggedInUser > 0) {
        const foundUser = loggedInUser;
        setLoggedUser(foundUser);
@@ -32,9 +31,7 @@ export default function Profile() {
      );
    }, []);
 
-  { 
-   
-      return (
+    return (
         <div className="App">
           <Header />
           <div className="bg-gray-100">
@@ -317,6 +314,4 @@ export default function Profile() {
           </div>
         </div>
       );
-    
-  }
 }

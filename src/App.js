@@ -1,4 +1,5 @@
 import "./App.css";
+import "./typography.css";
 import React, { Component } from "react";
 import Login from "./Pages/Authentication/login/login";
 import Signup from "./Pages/Authentication/Signup/signup";
@@ -13,14 +14,14 @@ class App extends Component {
 
   render() {
     return (
-      <div className="Body-container">
+      <div className="App">
         <div className="header"></div>
     
         <div className="Brandname_header">
           <Router>
             <Routes>
               <Route exact path="/" element={<Explore />} />
-              <Route exact path="/trade" element={<Explore/>} />
+             
               <Route path="/Error404" element={<Error />} />
               <Route path="/Login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />

@@ -74,12 +74,12 @@ exports.login = async(req, res, next) => {
             return res.send("Error occured");
         }
     });
-    if (!req.body.username || !req.body.password) {
+    if (!req.body.email || !req.body.password) {
         return res.json({ message: "Fields are empty" });
     }
-    
+      
     const [row] = await conn.execute(
-        "select * from users where username=? ", [req.body.username]
+        "select * from users where email=?", [req.body.email]
     );
     if (row.length === 0) {
         return res.json({
@@ -87,25 +87,26 @@ exports.login = async(req, res, next) => {
         });
     }
   
-        const userDetails = {
-            userid: row[0].id,
-            email: row[0].username,
-            password: row[0].password
-        }
-          console.log(userDetails);
-        if (req.body.password !== userDetails.password) {
-                return res.json({
-                    message: "Incorrect password"
-                });
-            }else{
-                const theToken = jwt.sign({ id: row[0].id, email: row[0].username}, process.env.SECRETCODE, { expiresIn: '1h' });
-                return res.json({
-                    message: "Login succesful",
-                    token: theToken,
-                    admin: true,
-                    userDetail: userDetails
-                });
-            }    
+    const userDetails = {
+        userid: row[0].id,
+        username: row[0].username,
+        password: row[0].password
+    }
+    console.log(userDetails);
+    if (req.body.password !== userDetails.password) {
+        return res.json({
+            message: "Incorrect password"
+        });
+    }
+    else{
+        const theToken = jwt.sign({ id: row[0].id, username: row[0].username}, process.env.SECRETCODE, { expiresIn: '1h' });
+            return res.json({
+                message: "Login succesful",
+                token: theToken,
+                admin: true,
+                userDetail: userDetails
+        });
+    }    
 }
 
 exports.isAuth = async(req, res, next) => {
