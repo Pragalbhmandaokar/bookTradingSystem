@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import "./news.css";
 import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Notification from "../../../Pages/notification/notification";
-import { logout } from "../../../redux/userSlice";
 export default function News({ user }) {
   const userDetails = useSelector((state) => state.user);
   const [notificationPanel, setNotificationPanel] = useState(false);
+  const [notificationCount,setNotificationCount] = useState(0);
   const notificationController = () => {
     setNotificationPanel(!notificationPanel);
   };
@@ -17,6 +18,17 @@ export default function News({ user }) {
     localStorage.clear();
     navigate("/login");
   }
+  useEffect(()=>{
+     const userId = localStorage.getItem("userId");
+     axios
+       .get("http://localhost:4000/getNotification/" + userId)
+       .then((response) => {
+         const getData = async () => {
+          setNotificationCount(response.data.message.length); 
+         };
+         getData();
+       });
+  })
   return (
     <div>
       <div className="NewsTitle fixed">
@@ -36,7 +48,10 @@ export default function News({ user }) {
             className="btn btn-primary "
             onClick={notificationController}
           >
-            Notifications <span className="badge badge-light ">0</span>
+            Notifications{" "}
+            <span className="badge badge-light font-sans text-[#ee2533] ">
+              {notificationCount}
+            </span>
           </Button>
 
           {userDetails.user && userDetails.user.loggedIn ? (
@@ -65,7 +80,9 @@ export default function News({ user }) {
           )}
         </ul>
       </div>
-      {notificationPanel && <Notification userDetails={userDetails} />}
+      {notificationPanel && (
+        <Notification userDetails={userDetails} notificationCount ={notificationCount}/>
+      )}
     </div>
   );
 }

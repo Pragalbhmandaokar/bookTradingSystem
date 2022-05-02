@@ -185,21 +185,21 @@
 }
 
 .content p {
-    margin: 0;
+    margin: 0%;
     padding: 10px 0;
 }
 
 .panelHeader {
+    margin-left:10%;
     width: 100%;
     max-width: 100%;
     grid-area: header;
-    margin: 2% 2%;
 }
 
 .cardHolder {
-    margin: 10% 0;
+    margin: 10% 10%;
     max-width: 100%;
-    width: 100%;
+    width: 90%;
     margin-top: 2%;
     grid-area: main;
     position: relative;
