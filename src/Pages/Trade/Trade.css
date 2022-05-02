@@ -11,7 +11,10 @@
     overflow: hidden;
     transition: 0.2s;
 }
-
+.ReactModal__Overlay{
+transition:0.5s;
+    z-index:50;
+}
 .service-trade-panel.openPanel {
     width: 50%;
     top: 0;

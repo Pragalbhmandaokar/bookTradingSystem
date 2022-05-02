@@ -7,10 +7,7 @@ const app = express();
 const router = require("./router");
 
 const conn = require("./dbConnection").promise();
-
-const Q_SELECT_USERNAME = "SELECT * FROM users WHERE username=?";
-const Q_INSERT_NEWITEM =
-  "Insert into item(productName,Author,requirement,) Values(?,?,?)";
+const Q_INSERT_NEWITEM = "Insert into item(productName,Author,requirement,) Values(?,?,?)";
 const Q_SELECT_ALL_PRODUCT_QUERY = "SELECT * FROM `bookscollection`";
 
 const PORT = process.env.PORT || 4000;
@@ -30,6 +27,7 @@ connection.connect((err) => {
 
 app.use(cors());
 app.use(express.json());
+app.use(router);
 
 if (process.env.NODE_ENV == "production") {
   app.use(express.static("/build"));
@@ -41,8 +39,6 @@ if (process.env.NODE_ENV == "production") {
 app.get("/", (req, res) => {
   res.send("Server is online");
 });
-
-app.use(router);
 
 app.post("/registration", async (req, res) => {
   const password = req.body.password;
@@ -109,7 +105,7 @@ return res.json({message: result});
   })
 });
 
-app.post("/BookTransaction",(req,res)=>{
+app.post("/BookTransaction",async(req,res)=>{
   const lid = req.body.lid;
   const rid = req.body.rid;
   const lbookid = req.body.lbookid;
@@ -118,18 +114,23 @@ app.post("/BookTransaction",(req,res)=>{
   if (lid == rid) {
     return res.json({ message: "Books can not swap" });
   }
+    const [row] = await conn.execute(
+      "select * from bookTransaction where lid=? and rid=? and lbookid=? and rlookid=? and transactionStatus=1",
+      [lid,rid,lbookid,rbookid]
+    );
+    if(row.length > 0){
+      return res.json({message : "book is in trade already"})
+    }
   const BookTransactionOn =
     "INSERT into booktransaction(lid,rid,lbookid,rlookid,transactionStatus) values(?,?,?,?,?)";
     try{
     connection.query(BookTransactionOn,[lid,rid,lbookid,rbookid,status],(err,result)=>{
-      
       if(err){
         console.log(err);
         return res.json({message: err.code});
       }else{
         return res.json({message: "Requested"});
       }
-      
     })
   }catch(err){
      return res.json({message : err});
@@ -232,7 +233,12 @@ app.get("/Product/:userId", async(req, res) => {
     });
   }
 });
-
+app.get("/allBooks",async(req,res)=>{
+  connection.query("select * from bookscollection",(err,result)=>{
+    if(err) return res.send(err);
+    res.json({message: result});
+  });
+});
 app.post("/updateRequestNotification/:transactionId", async(req,res)=>{
   try {
     if(req.params.transactionId == null || req.params.transactionId == undefined){

@@ -10,6 +10,7 @@ import { useSelector,useDispatch } from "react-redux";
 
 function Explore() {
   const userDetails = useSelector((state) => state.user);
+  const [bookData,setBookData] = useState([]);
   const dispatch = useDispatch();
   const [user,getUser] = useState([]);
   const [toggleState, setToggleState] = useState(false);
@@ -51,6 +52,14 @@ function Explore() {
       }
       getData();
     });
+
+    Axios.get("http://localhost:4000/allBooks").then((responses) => {
+      async function getData() {
+        setBookData(responses.data.message);
+
+      }
+      getData();
+    });
   }, []);
  
   {
@@ -60,6 +69,7 @@ function Explore() {
           <Header
             toggleState={toggleState}
             setToggleState={setToggleState}
+            bookData={bookData}
           ></Header>
           <News user={user}> </News>
 
@@ -68,7 +78,7 @@ function Explore() {
             <div className="panelHeader">
               <h2>Discover book you need</h2>
               <div className="content">
-                <p>
+                <p className="font-bold h6-thin">
                   Paragraphs are the building blocks of papers. Many students
                   define paragraphs in terms of length: a paragraph is a group
                   of at least five sentences, a paragraph is half a page long,
@@ -92,7 +102,6 @@ function Explore() {
                 return (
                   <Cards
                     getExploreReferesh={getExploreReferesh}
-                  
                     PageBehaviour={true}
                     setToggleState={setToggleState}
                     username={val.booksName}
@@ -136,6 +145,61 @@ function Explore() {
                         </a>
                       </div>
                     </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="">
+                <div className="flex justify-center bg-slate-300 items-center rounded-sm h-24 text-black mb-2">
+                  <div className="w-[35%] flex justify-center items-center bg-red-300 h-[90%] m-2 ">
+                    <img src="" alt="fp" />
+                  </div>
+                  <div className="w-full h-full font-bold body-1 px-4 py-2">
+                    <span>&#x201C;</span>Done is better than perfect.
+                    <span>&#x201D;</span>
+                    <p className="body-2 font-bold">
+                      {" - "} {userDetails.user.name}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex justify-center items-center bg-slate-300 rounded-sm h-24 text-black mb-2">
+                  <div className="w-[35%] flex justify-center items-center bg-red-300 h-[90%] m-2 ">
+                    <img src="" alt="fp" />
+                  </div>
+                  <div className="w-full h-full font-bold body-1 px-4 py-2">
+                    <span>&#x201C;</span>Done is better than perfect.
+                    <span>&#x201D;</span>
+                    <p className="body-2 font-bold">
+                      {" - "} {userDetails.user.name}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="font-bold">
+                Your friend is interested in
+                <div className="flex justify-center bg-red-200 items-center rounded-sm h-24 text-black mb-2">
+                  <div className="w-[35%] flex justify-center items-center bg-red-300 h-[90%] m-2 ">
+                    <img src="" alt="fp" />
+                  </div>
+                  <div className="w-full h-full font-bold body-1 px-4 py-2">
+                    <span>&#x201C;</span>Done is better than perfect.
+                    <span>&#x201D;</span>
+                    <p className="body-2 font-bold">
+                      {" - "} {userDetails.user.name}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex justify-center items-center bg-red-200 rounded-sm h-24 text-black mb-2">
+                  <div className="w-[35%] flex justify-center items-center bg-red-300 h-[90%] m-2 ">
+                    <img src="" alt="fp" />
+                  </div>
+                  <div className="w-full h-full font-bold body-1 px-4 py-2">
+                    <span>&#x201C;</span>Done is better than perfect.
+                    <span>&#x201D;</span>
+                    <p className="body-2 font-bold">
+                      {" - "} {userDetails.user.name}
+                    </p>
                   </div>
                 </div>
               </div>

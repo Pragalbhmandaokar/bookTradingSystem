@@ -15,27 +15,28 @@ const customStyles = {
     right: "auto",
     bottom: "auto",
     marginRight: "-50%",
-    zindex:100,
+    zindex: "100",
     transform: "translate(-50%, -50%)",
-    backgroundColor: "#376288",
+    backgroundColor: "#27272a",
   },
 };
 
-const RequestSend = ({ isModal, onToggleModal,bookname }) => {
+const NotificationModal = ({ isModal, onToggleModal, key, val }) => {
   const userDetails = useSelector((state) => state.user);
   const [closeModal, setCloseModal] = useState(false);
   const CloseButtonFunc = () => {
-   onToggleModal();
+    onToggleModal();
   };
-  console.log(bookname);
+
   return (
-    <div className="w-full h-full z-50">
+    <div>
       <Modal
         isOpen={isModal}
         onRequestClose={onToggleModal}
         style={customStyles}
         ariaHideApp={false}
         contentLabel="Example Modal"
+        key={key}
       >
         <div className="mx-4">
           <img
@@ -52,12 +53,12 @@ const RequestSend = ({ isModal, onToggleModal,bookname }) => {
               ? userDetails.user.name
               : "username"}
           </h2>
-          <h1 className=" mt-8 text-4xl ">Thanks for your purchase</h1>
+          <h1 className=" mt-8 text-4xl ">Book Request accepted</h1>
           <h4 className=" mt-8 text-base ">
-            Notification send for <span className="font-bold">{bookname.bookTradeName}</span>
+            this book now belongs to <span className="font-bold">{val.username}</span>
           </h4>
           <div className="flex items-center justify-center w-56 text-base mt-12 h-12 float-right rounded-3xl border-2 border-pink-500  cursor-pointer">
-            benefits
+            Checkout benefits
           </div>
         </div>
       </Modal>
@@ -65,9 +66,9 @@ const RequestSend = ({ isModal, onToggleModal,bookname }) => {
   );
 };
 
-RequestSend.propTypes = {
+NotificationModal.propTypes = {
   isModal: PropTypes.bool,
   closeModal: PropTypes.func,
 };
 
-export default RequestSend;
+export default NotificationModal;
