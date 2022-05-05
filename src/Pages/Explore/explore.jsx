@@ -20,31 +20,37 @@ function Explore() {
   useEffect(() => {
     const userid = localStorage.getItem("userId");
     console.log(userDetails.user);
-    if (userDetails.user == null) {
-      Axios.get("http://localhost:4000/getUserdetailsByID/" + userid).then(
-        (response) => {
-          const getState = () => {
-             console.log("userid :", response.data.message[0]);
-            getUser(response.data.message[0]);
-            dispatch(
-              login({
-                userId: response.data.message[0].id,
-                name: response.data.message[0].username,
-                admin: response.data.message[0].admin,
-                loggedIn: true,
-              })
-            );
-            console.log(user);
-          };
-          getState();
-        }
-      );
+    if (userid !== null) {
+      if (userDetails.user === null) {
+        Axios.get("http://localhost:4000/getUserdetailsByID/" + userid).then(
+          (response) => {
+            const getState = () => {
+              console.log("userid :", response.data.message[0]);
+              getUser(response.data.message[0]);
+              dispatch(
+                login({
+                  userId: response.data.message[0].id,
+                  name: response.data.message[0].username,
+                  admin: response.data.message[0].admin,
+                  loggedIn: true,
+                })
+              );
+              console.log(user);
+            };
+            getState();
+          }
+        );
+      }
     }
+    
     let userId = null;
     if (userDetails.user != null) {
       if (Object.keys(userDetails.user).length > 0) {
         userId = userDetails.user.userId;
       }
+    }
+    if(userId != null){
+      console.log("sdfs");
     }
     Axios.get(`http://localhost:4000/product/${userId}`).then((Response) => {
       async function getData() {
@@ -56,7 +62,6 @@ function Explore() {
     Axios.get("http://localhost:4000/allBooks").then((responses) => {
       async function getData() {
         setBookData(responses.data.message);
-
       }
       getData();
     });
@@ -98,19 +103,20 @@ function Explore() {
             </div>
             <div className="MainPanelContainer"></div>
             <div className="cardHolder">
-              {dbCheck.map((val, index) => {
-                return (
-                  <Cards
-                    getExploreReferesh={getExploreReferesh}
-                    PageBehaviour={true}
-                    setToggleState={setToggleState}
-                    username={val.booksName}
-                    bookCoverLink={val.links}
-                    collectionId={val.collectionId}
-                    bookId={val.id}
-                  ></Cards>
-                );
-              })}
+              {dbCheck &&
+                dbCheck.map((val, index) => {
+                  return (
+                    <Cards
+                      getExploreReferesh={getExploreReferesh}
+                      PageBehaviour={true}
+                      setToggleState={setToggleState}
+                      username={val.booksName}
+                      bookCoverLink={val.links}
+                      collectionId={val.collectionId}
+                      bookId={val.id}
+                    ></Cards>
+                  );
+                })}
             </div>
             <div className="newsAndInterView bg-gray-800 text-white">
               <div className="bg-gray-800">
@@ -152,25 +158,33 @@ function Explore() {
               <div className="">
                 <div className="flex justify-center bg-slate-300 items-center rounded-sm h-24 text-black mb-2">
                   <div className="w-[35%] flex justify-center items-center bg-red-300 h-[90%] m-2 ">
-                    <img src="" alt="fp" />
+                    <img
+                      className="mx-auto"
+                      src="https://cdn.australianageingagenda.com.au/wp-content/uploads/2015/06/28085920/Phil-Beckett-2-e1435107243361.jpg"
+                      alt=""
+                    />
                   </div>
                   <div className="w-full h-full font-bold body-1 px-4 py-2">
                     <span>&#x201C;</span>Done is better than perfect.
                     <span>&#x201D;</span>
                     <p className="body-2 font-bold">
-                      {" - "} {userDetails.user.name}
+                      {" - "} {userDetails.user && userDetails.user.name}
                     </p>
                   </div>
                 </div>
                 <div className="flex justify-center items-center bg-slate-300 rounded-sm h-24 text-black mb-2">
                   <div className="w-[35%] flex justify-center items-center bg-red-300 h-[90%] m-2 ">
-                    <img src="" alt="fp" />
+                    <img
+                      className="mx-auto"
+                      src="https://cdn.australianageingagenda.com.au/wp-content/uploads/2015/06/28085920/Phil-Beckett-2-e1435107243361.jpg"
+                      alt=""
+                    />
                   </div>
                   <div className="w-full h-full font-bold body-1 px-4 py-2">
                     <span>&#x201C;</span>Done is better than perfect.
                     <span>&#x201D;</span>
                     <p className="body-2 font-bold">
-                      {" - "} {userDetails.user.name}
+                      {" - "} {userDetails.user && userDetails.user.name}
                     </p>
                   </div>
                 </div>
@@ -180,25 +194,33 @@ function Explore() {
                 Your friend is interested in
                 <div className="flex justify-center bg-red-200 items-center rounded-sm h-24 text-black mb-2">
                   <div className="w-[35%] flex justify-center items-center bg-red-300 h-[90%] m-2 ">
-                    <img src="" alt="fp" />
+                    <img
+                      className="mx-auto"
+                      src="https://cdn.australianageingagenda.com.au/wp-content/uploads/2015/06/28085920/Phil-Beckett-2-e1435107243361.jpg"
+                      alt=""
+                    />
                   </div>
-                  <div className="w-full h-full font-bold body-1 px-4 py-2">
-                    <span>&#x201C;</span>Done is better than perfect.
+                  <div className="w-full h-full font-bold body-1 px-4">
+                    <span>&#x201C;</span>Alchemist is one of best novel for free soul
                     <span>&#x201D;</span>
                     <p className="body-2 font-bold">
-                      {" - "} {userDetails.user.name}
+                      {" - "} {userDetails.user && userDetails.user.name}
                     </p>
                   </div>
                 </div>
                 <div className="flex justify-center items-center bg-red-200 rounded-sm h-24 text-black mb-2">
                   <div className="w-[35%] flex justify-center items-center bg-red-300 h-[90%] m-2 ">
-                    <img src="" alt="fp" />
+                    <img
+                      className=" mx-auto"
+                      src="https://cdn.australianageingagenda.com.au/wp-content/uploads/2015/06/28085920/Phil-Beckett-2-e1435107243361.jpg"
+                      alt=""
+                    />
                   </div>
                   <div className="w-full h-full font-bold body-1 px-4 py-2">
                     <span>&#x201C;</span>Done is better than perfect.
                     <span>&#x201D;</span>
                     <p className="body-2 font-bold">
-                      {" - "} {userDetails.user.name}
+                      {" - "} {userDetails.user && userDetails.user.name}
                     </p>
                   </div>
                 </div>

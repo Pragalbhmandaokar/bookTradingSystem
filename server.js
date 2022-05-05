@@ -215,6 +215,7 @@ app.get("/uploadItem", (req, res) => {
 });
 
 app.get("/Product/:userId", async(req, res) => {
+  console.log(req.params.userId);
   if(req.params.userId == null){
     connection.query(Q_SELECT_ALL_PRODUCT_QUERY, (err, result) => {
       if (err) {

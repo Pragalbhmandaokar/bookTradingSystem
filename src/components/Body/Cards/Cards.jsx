@@ -30,6 +30,7 @@ function Cards({
   };
 
   const SwapBook = (bookId) => {
+    if(!selectCard){
     Axios.post("http://localhost:4000/BookTransaction", {
       lid: bookDetails.bookDetails.bookTradeLenderId,
       rid: collectionId,
@@ -39,28 +40,39 @@ function Cards({
     }).then((Response) => {
       console.log(Response.data.message);
       setIsOpen(true);
-    });
+      
+    });setSelectCard(true);}else{
+      console.log("book transaction in process");
+    }
+     
   };
   async function refreshPage(mode) {
     getReferesh(mode);
   }
 
   const AddBookExplore = (bookId) => {
-    const bookIdToTrade = bookId;
-    dispatch(
-      addBookFromTrade({
-        bookTradeName:username,
-        bookTradeId: bookIdToTrade,
-        bookTradeLenderId: collectionId,
-        bookTrade: true,
-      })
-    );
+    if(!selectCard){
+      const bookIdToTrade = bookId;
+      dispatch(
+        addBookFromTrade({
+          bookTradeName: username,
+          bookTradeId: bookIdToTrade,
+          bookTradeLenderId: collectionId,
+          bookTrade: true,
+        })
+      );
+      onButtonClick(true);
+    }else{
+      console.log("already in swap");
+    }
+    
   };
   if (Explore) {
     return (
       <div
         className={selectCard ? "cardContainer bg-slate-500 cursor-pointer" : "cardContainer cursor-pointer bg-slate-300"}
         id={`${bookId}`}
+        
       >
         <div className="cardInsider">
           <div className="cardImage">
@@ -70,13 +82,13 @@ function Cards({
           <div className="CardNameHolder p-2">
             <div className="body-2 font-bold">{username}</div>
 
-            {userDetails && userDetails.admin && (
+            {userDetails.user && (userDetails.user.admin==0) && (
               <div className="CardButtonHolder h-full">
                 <button
                   className="bg-white hover:bg-gray-100 text-gray-800 font-semibold h-full border border-gray-400 rounded shadow"
                   onClick={() => {
                     AddBookExplore(bookId);
-                    onButtonClick(true);
+                   
                   }}
                 >
                   Trade
@@ -95,7 +107,13 @@ function Cards({
     );
   } else {
     return (
-      <div className="cardContainer smallSize">
+      <div
+        className={
+          selectCard
+            ? "cardContainer smallSize bg-slate-500"
+            : "cardContainer smallSize"
+        }
+      >
         <div className="cardInsider">
           <div className="cardImage">
             <img src={bookCoverLink}></img>

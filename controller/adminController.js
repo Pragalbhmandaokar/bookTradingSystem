@@ -90,7 +90,8 @@ exports.login = async(req, res, next) => {
     const userDetails = {
         userid: row[0].id,
         username: row[0].username,
-        password: row[0].password
+        password: row[0].password,
+        admin: row[0].admin
     }
     console.log(userDetails);
     if (req.body.password !== userDetails.password) {
