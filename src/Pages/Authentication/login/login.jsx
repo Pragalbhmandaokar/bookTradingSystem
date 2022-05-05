@@ -28,7 +28,9 @@ function Login(){
            dispatch(
              login({
                userId: Response.data.userDetail.userid,
-               name: username,
+               admin: Response.data.userDetail.admin,
+               name: Response.data.userDetail.username,
+               email:username,
                loggedIn: true,
              })
            );
@@ -76,7 +78,7 @@ function Login(){
                   <div className="SubmitContainer">
                     <button onClick={LogindbFunction}>Login</button>
                     <span>Forget password?</span>
-                    <p>{errorHandling}</p>
+                    <p className='text-red'>{errorHandling}</p>
                   </div>
 
                   <div className="formFooter">
