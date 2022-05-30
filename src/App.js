@@ -16,18 +16,16 @@ class App extends Component {
     return (
       <div className="App">
         <div className="header"></div>
-    
+
         <div className="Brandname_header">
           <Router>
             <Routes>
               <Route exact path="/" element={<Explore />} />
-             
+              <Route path="/product/:productId" element={<Product />} exact />
               <Route path="/Error404" element={<Error />} />
               <Route path="/Login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/profile" element={<Profile />} />
-              <Route path="/product" element={<Product />} />
-            
             </Routes>
           </Router>
         </div>

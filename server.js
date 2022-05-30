@@ -5,7 +5,7 @@ const mysql = require("mysql");
 const Path = require("path");
 const app = express();
 const router = require("./router");
-
+const payment = require("./controller/payment");
 const conn = require("./dbConnection").promise();
 const Q_INSERT_NEWITEM = "Insert into item(productName,Author,requirement,) Values(?,?,?)";
 const Q_SELECT_ALL_PRODUCT_QUERY = "SELECT * FROM `bookscollection`";
@@ -29,6 +29,7 @@ app.use(cors());
 app.use(express.json());
 app.use(router);
 
+app.use("/api/payment/",payment);
 if (process.env.NODE_ENV == "production") {
   app.use(express.static("/build"));
   app.get("*", (req, res) => {

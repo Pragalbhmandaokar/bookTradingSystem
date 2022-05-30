@@ -7,7 +7,7 @@ const {
   tradeUpdate,
   updateTradeStatus,
 } = require("./controller/tradeController");
-const { AddBook, removeBook } = require("./controller/bookController");
+const { AddBook, removeBook, selectProductId } = require("./controller/bookController");
 const { userSelectAll } = require("./controller/userController");
 router.post(
   "/login",
@@ -19,6 +19,7 @@ router.post(
   login
 );
 
+router.get("/selectProductDetails/:productId", selectProductId);
 router.get("/selectBookByUserId/:userId",usersBookSelectByID);
 router.post("/BookTrade", tradeBook);
 router.get("/userAllSelect", userSelectAll);

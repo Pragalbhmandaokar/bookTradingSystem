@@ -62,9 +62,7 @@ export default function News({ user }) {
                   : "profile name"}
               </div>
               <div
-                className="flex justify-center items-center px-2 bg-white h-8 w-auto rounded-sm mx-2 btn"
-                onClick={LogoutAction}
-              >
+                className="flex justify-center items-center px-2 bg-white h-8 w-auto rounded-sm mx-2 btn" onClick={LogoutAction}>
                 log out
               </div>
             </>

@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,createRef } from "react";
 import Axios from "axios";
 import "./Header.css";
 import { Link } from "react-router-dom";
 import Trade from "../../../Pages/Trade/Trade";
 import { useSelector } from "react-redux";
-
+import { useNavigate } from "react-router-dom";
 export default function Header({ toggleState, setToggleState,bookData }) {
-    const userDetails = useSelector((state) => state.user);
+  const navigate = useNavigate();
+
+  const userDetails = useSelector((state) => state.user);
   const [dbCheck, GetDbCheck] = useState([]);
   const [bookSearch,setBookSearch] = useState("");
   const onButtonClick = (mode) => {
     setToggleState(mode);
   };
-
   useEffect(() => {
     Axios.get("http://localhost:4000/product").then((Response) => {
       async function getData() {
@@ -21,7 +22,10 @@ export default function Header({ toggleState, setToggleState,bookData }) {
       getData();
     });
   }, []);
-console.log(bookData);
+
+  function takeToBook(e){
+    navigate("product/" + e.currentTarget.id);
+  }
   return (
     <div className="containerHeader fixed flex items-center">
       <ul className="Header">
@@ -29,9 +33,9 @@ console.log(bookData);
           <div className="logo">
             <span className="px-4 text-white h4-thin">
               C
-              <spam className="hover:hidden transition ease-in-out delay-120 ">
+              <span className="hover:hidden transition ease-in-out delay-120 ">
                 onnectpag
-              </spam>
+              </span>
               e
             </span>
           </div>
@@ -66,9 +70,13 @@ console.log(bookData);
             .filter((book) => book.booksName.includes(bookSearch))
             .map((book, index) => {
               return (
-                <div className="bg-white mb-[1px] rounded-sm p-2 cursor-pointer" book={book} >
+                <div
+                  className="bg-white mb-[1px] rounded-sm p-2 cursor-pointer"
+                  book={book}
+                  id={book.id}
+                  onClick={(e) => takeToBook(e)}
+                >
                   {" "}
-                  {console.log(book)}
                   {book.booksName}
                 </div>
               );

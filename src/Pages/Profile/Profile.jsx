@@ -10,6 +10,7 @@ export default function Profile() {
   const [dbCheck, GetDbCheck] = useState([]);
   const userDetails = useSelector((state) => state.user);
   const [loggedUser,setLoggedUser] = useState([]);
+
    useEffect(() => {
      const loggedInUser = localStorage.getItem("userId");
      if (loggedInUser && loggedInUser > 0) {
